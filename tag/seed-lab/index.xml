@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Seed Lab | Luminolt</title><link>https://example.com/tag/seed-lab/</link><atom:link href="https://example.com/tag/seed-lab/index.xml" rel="self" type="application/rss+xml"/><description>Seed Lab</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 07 Dec 2022 07:20:37 +0800</lastBuildDate><image><url>https://example.com/media/icon_hu1b90dea3b5752ec4ed6154c0dc881a21_30314_512x512_fill_lanczos_center_3.png</url><title>Seed Lab</title><link>https://example.com/tag/seed-lab/</link></image><item><title>Tips for TCP/IP Attack Lab</title><link>https://example.com/post/seed-lab-tcp-ip/</link><pubDate>Wed, 07 Dec 2022 07:20:37 +0800</pubDate><guid>https://example.com/post/seed-lab-tcp-ip/</guid><description>&lt;p>This is a tip-page for TCP/IP Attack Lab of seed-lab project.&lt;/p>
+&lt;h2 id="1---about-gcc">1 - About gcc&lt;/h2>
+&lt;p>gcc is not installed on seed&amp;rsquo;s docker container. So when you need to compile
+the C program on heterogeneous platforms (like MacOSX, Arch etc.),
+you may encounter the glibc version-mismatch problem.&lt;/p>
+&lt;p>To cope with such situation, you can install the gcc yourself:&lt;/p>
+&lt;ol>
+&lt;li>Add local sources on &lt;code>apt&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nano /etc/apt/sources.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Recommended sources:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multivers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Update the apt source and install gcc.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt install gcc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>You are able to compile the C program on containers.&lt;/li>
+&lt;/ol>
+&lt;h2 id="2---about-syn-flood-attack-c-version">2 - About SYN Flood Attack (C Version)&lt;/h2>
+&lt;p>In this part, my computer crashed when lauching such attack
+to the victim with countermesuare (SYN Cookie) using C script.
+The reason is that the packet sending failure causes the dead loop to be too fast.&lt;/p>
+&lt;p>You can add a sleep statement to solve it:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/*********************************************************
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> Step 3: Finally, send the spoofed packet
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">********************************************************/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">send_raw_ip_packet&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ip&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">usleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that &lt;code>usleep&lt;/code> is for Linux/Unix Kernels&amp;rsquo; POSIX.&lt;/p></description></item></channel></rss>

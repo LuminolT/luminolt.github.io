@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang | Luminolt</title><link>https://example.com/tag/golang/</link><atom:link href="https://example.com/tag/golang/index.xml" rel="self" type="application/rss+xml"/><description>Golang</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 19 Sep 2021 10:12:01 +0800</lastBuildDate><image><url>https://example.com/media/icon_hu1b90dea3b5752ec4ed6154c0dc881a21_30314_512x512_fill_lanczos_center_3.png</url><title>Golang</title><link>https://example.com/tag/golang/</link></image><item><title>A Simple CORS Issue</title><link>https://example.com/post/a-simple-cors-issue/</link><pubDate>Sun, 19 Sep 2021 10:12:01 +0800</pubDate><guid>https://example.com/post/a-simple-cors-issue/</guid><description>&lt;h2 id="跨域资源共享-cors">跨域资源共享 CORS&lt;/h2>
+&lt;h3 id="技术性定义">技术性定义&lt;/h3>
+&lt;p>跨域资源共享（Cross-Origin Resource Sharing）是一个系统，它由一系列传输的&lt;code>HTTP&lt;/code>头组成，这些&lt;code>HTTP&lt;/code>头决定浏览器是否阻止前端&lt;code>JavaScript&lt;/code>代码获取跨域请求的响应。&lt;/p>
+&lt;h3 id="cors-header">CORS Header&lt;/h3>
+&lt;p>Access-Control-Allow-Origin
+指示请求的资源能共享给哪些域。&lt;/p>
+&lt;p>Access-Control-Allow-Credentials
+指示当请求的凭证标记为 true 时，是否响应该请求。&lt;/p>
+&lt;p>Access-Control-Allow-Headers
+用在对预请求的响应中，指示实际的请求中可以使用哪些 HTTP 头。&lt;/p>
+&lt;p>Access-Control-Allow-Methods
+指定对预请求的响应中，哪些 HTTP 方法允许访问请求的资源。&lt;/p>
+&lt;p>Access-Control-Expose-Headers
+指示哪些 HTTP 头的名称能在响应中列出。&lt;/p>
+&lt;p>Access-Control-Max-Age
+指示预请求的结果能被缓存多久。&lt;/p>
+&lt;p>Access-Control-Request-Headers
+用于发起一个预请求，告知服务器正式请求会使用那些 HTTP 头。&lt;/p>
+&lt;p>Access-Control-Request-Method
+用于发起一个预请求，告知服务器正式请求会使用哪一种 HTTP 请求方法。&lt;/p>
+&lt;p>Origin
+指示获取资源的请求是从什么域发起的。&lt;/p>
+&lt;blockquote>
+&lt;p>了解更多，推荐阅读：
+&lt;a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="解决方法">解决方法&lt;/h2>
+&lt;h3 id="响应头设置">响应头设置&lt;/h3>
+&lt;p>让服务器设置一个响应头，允许浏览器向它发出跨域请求：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Origin: &amp;lt;Frontend_Server_IP&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然更粗暴一点也可直接：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Origin: *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该方式表明 CORS 不考虑请求域，在开发时较为容易，但如果上线后会引起安全性问题（如构造POST请求）。&lt;/p>
+&lt;h3 id="golang-代码实现">Golang 代码实现&lt;/h3>
+&lt;p>从网上找到了一个小小中间件：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">CORSMiddleware&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">HandlerFunc&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Writer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Header&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Access-Control-Allow-Origin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;*&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Writer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Header&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Access-Control-Allow-Credentials&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;true&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Writer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Header&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Access-Control-Allow-Headers&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Writer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Header&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Access-Control-Allow-Methods&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;POST, OPTIONS, GET, PUT&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Request&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Method&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s">&amp;#34;OPTIONS&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatus&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">204&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Next&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Ref : https://stackoverflow.com/questions/29418478/go-gin-framework-cors
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>加入路由引擎中：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">r&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Default&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nf">CORSMiddleware&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>就OK辽 o(&lt;em>￣▽￣&lt;/em>)ブ&lt;/p></description></item><item><title>Nil Map and Nil Slice in Golang</title><link>https://example.com/post/nil-map-and-nil-slice/</link><pubDate>Sun, 08 Aug 2021 00:52:13 +0800</pubDate><guid>https://example.com/post/nil-map-and-nil-slice/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>我烂了&lt;/p>
+&lt;h2 id="nil">Nil&lt;/h2>
+&lt;p>&lt;code>Golang&lt;/code>的&lt;code>nil&lt;/code>是对于传统C系语言&lt;code>null&lt;/code>所做的一个安全性优化，笔者在学习&lt;code>map&lt;/code>和&lt;code>slice&lt;/code>有一些相关的疑惑。&lt;/p>
+&lt;p>在如下代码运行后，&lt;code>map0&lt;/code>和&lt;code>slice0&lt;/code>的值均为&lt;code>nil&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">map0&lt;/span> &lt;span class="kd">map&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="kt">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">slice0&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="kt">string&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>与之对应的是比较安全的建立方式，这种情况下建立的空&lt;code>map&lt;/code>和空&lt;code>slice&lt;/code>都非&lt;code>nil&lt;/code>值：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">map1&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">make&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">map&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">slice1&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">make&lt;/span>&lt;span class="p">([]&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="对map--nil">对&lt;code>map == nil&lt;/code>&lt;/h2>
+&lt;p>对于&lt;code>map&lt;/code>增加键值对，前者会发生&lt;code>panic&lt;/code>，而后者可以：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">map0&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="nx">maths&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">60&lt;/span> &lt;span class="c1">//panic: assignment to entry in nil map
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">map1&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="nx">maths&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">60&lt;/span> &lt;span class="c1">//OK
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="对slice--nil">对&lt;code>slice == nil&lt;/code>&lt;/h2>
+&lt;p>对于&lt;code>slice&lt;/code>的常规操作，则两者都可以进行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;maths&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;maths&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">slice1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="原因分析">原因分析&lt;/h2>
+&lt;p>&lt;code>map&lt;/code>增加键值对的行为是在&lt;code>Golang&lt;/code>底层实现的，而&lt;code>slice&lt;/code>的&lt;code>append&lt;/code>,&lt;code>range&lt;/code>,&lt;code>len&lt;/code>操作都是在&lt;code>builtin&lt;/code>包内的函数实现的，对&lt;code>nil&lt;/code>值情况做了差错控制。&lt;/p>
+&lt;h2 id="结论">结论&lt;/h2>
+&lt;p>用&lt;code>make&lt;/code>，请。&lt;/p></description></item></channel></rss>
