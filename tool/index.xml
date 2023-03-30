@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tool | Luminolt</title><link>https://example.com/tool/</link><atom:link href="https://example.com/tool/index.xml" rel="self" type="application/rss+xml"/><description>Tool</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 17 Jun 2022 00:24:07 +0800</lastBuildDate><image><url>https://example.com/media/icon_hu1b90dea3b5752ec4ed6154c0dc881a21_30314_512x512_fill_lanczos_center_3.png</url><title>Tool</title><link>https://example.com/tool/</link></image><item><title>Tool</title><link>https://example.com/tool/</link><pubDate>Fri, 17 Jun 2022 00:24:07 +0800</pubDate><guid>https://example.com/tool/</guid><description>&lt;h3 id="shu-导航--shu-re-direction">&lt;strong>SHU 导航&lt;/strong> | SHU Re-direction&lt;/h3>
+&lt;hr>
+&lt;p>&lt;a href="https://www.shu.edu.cn/" target="_blank" rel="noopener">官网&lt;/a> &lt;a href="http://newmail.shu.edu.cn/" target="_blank" rel="noopener">邮箱&lt;/a> &lt;a href="http://202.120.117.231:8991/F/YP82FYYBJHBUMFXQSY6NRQGC898HCNJVK8M41AQAL1I169KJQG-08364?&amp;amp;pds_handle=GUEST" target="_blank" rel="noopener">书籍查询&lt;/a> &lt;a href="http://www.elearning.shu.edu.cn/portal" target="_blank" rel="noopener">网络课程&lt;/a> &lt;a href="http://pim.shu.edu.cn/taskcenter/home" target="_blank" rel="noopener">PIM&lt;/a> &lt;a href="https://eportal.shu.edu.cn/" target="_blank" rel="noopener">一网通办&lt;/a> &lt;a href="https://xk2.zkllab.com/" target="_blank" rel="noopener">选课助手&lt;/a> &lt;a href="http://www.xk.shu.edu.cn/" target="_blank" rel="noopener">在线选课&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://10.10.9.139/client/cloudPrint.html" target="_blank" rel="noopener">图书馆云打印&lt;/a> &lt;a href="http://acmoj.shu.edu.cn/problems/" target="_blank" rel="noopener">ACM-OJ&lt;/a> &lt;a href="https://www.luogu.com.cn/problem/list" target="_blank" rel="noopener">洛谷&lt;/a> &lt;a href="http://nhce.shu.edu.cn/" target="_blank" rel="noopener">视听说英语平台&lt;/a> &lt;a href="http://www.jwc.shu.edu.cn/2020wangluokongjiananquanzhizhao.pdf" target="_blank" rel="noopener">网安培养方案&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://jwb.shu.edu.cn/" target="_blank" rel="noopener">教务部&lt;/a>&lt;/p>
+&lt;h3 id="密码学工具--cryptography-tools">密码学工具 | Cryptography Tools&lt;/h3>
+&lt;hr>
+&lt;div class="row mt-2"
+style="margin-left: 0px;
+margin-right: 0px">
+&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
+style="margin-top: 20px">
+&lt;a href="https://www.sagemath.org/index.html">
+&lt;img width="250" height="65" alt="SageMath Logo" class="round raised" src="https://picgo-1303220879.cos.ap-shanghai.myqcloud.com//img20230331042448.png" title="SageMath Mathematical Software">
+&lt;/a>
+&lt;text style="text-align: center"> SageMath: Mathematical Software &lt;/text>
+&lt;/div>
+&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
+style="margin-top: 20px">
+&lt;a href="https://www.sagemath.org/index.html">
+&lt;img width="65" height="65" alt="SageMath Logo" class="round raised" src="https://pypi.org/static/images/logo-small.2a411bc6.svg" title="SageMath Mathematical Software">
+&lt;/a>
+&lt;text style="text-align: center"> pycryptodome: Cryptography Library for Python &lt;/text>
+&lt;/div>
+&lt;/div>
+&lt;!-- ### **校园生活** | Campus
+***
+[一网通办](https://eportal.shu.edu.cn/) [校历](https://www.shu.edu.cn/bzap.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1233) [后勤](https://hq.shu.edu.cn/fwzn.htm) [成就](http://www.act.shu.edu.cn/) [网上支付 ](https://pay.shu.edu.cn/SPPMain/) [校园应用](https://eportal.shu.edu.cn/apps/) [空闲教室](https://cj.shu.edu.cn/RoomUse/RoomUseDate/) [地图](http://map.shu.edu.cn/App/MapViewer?starter=001)[博物馆](http://www.museum.shu.edu.cn/index.php) [图书馆](https://lib.shu.edu.cn/)
+[孰知 ](http://www.sz.shu.edu.cn/Index.aspx) [电话黄页](https://www.shu.edu.cn/dhcx.htm) [校医院](https://www.xyy.shu.edu.cn/) [财务处](https://xssf.shu.edu.cn:8088/LocalLogin.aspx) [乐乎论坛](http://bbs.lehu.shu.edu.cn/) [学生社区管理](http://www.sq.shu.edu.cn/) [通知公告](https://zdpyc.shu.edu.cn/tzgglist.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1014) [专业信息公开](http://zyinfo.shu.edu.cn/)
+### **课程学习** | Curriculum
+***
+[网络课程](http://www.elearning.shu.edu.cn/portal) [泛雅(学习通网页版)](http://passport2.chaoxing.com/login?refer=http%3A%2F%2Fmooc2-ans.chaoxing.com%2Fmycourse%2Fstu%3Fcourseid%3D214190837%26clazzid%3D31605024%26cpi%3D147391051%26enc%3D520ea1039b791b4c16d2ae13d4f6f683%26t%3D1598976159741%26pageHeader%3D0&amp;fid=145&amp;newversion=true) [成绩查询](http://cj.shu.edu.cn/) [网络选课](http://www.xk.shu.edu.cn/) [选课助手](https://xk2.zkllab.com/) [英语四六级](http://cet-bm.neea.edu.cn/)
+[计算机等级考](https://eportal.shu.edu.cn/transfer/#id=174) [转专业申请](https://zzy.shu.edu.cn/) [知识机构库](http://ir.shu.edu.cn/) [学术报告](https://eportal.shu.edu.cn/calendar/#type=1062) [安全教育(安开)](http://ankai365.shu.edu.cn/) [易班](http://www.yiban.cn/school/index/id/5000022)
+[英语平台 ](http://nhce.shu.edu.cn/) [课程资源网站](http://class.cc.shu.edu.cn/) [教务处](http://www.jwc.shu.edu.cn/) [直录播云平台 ](http://vod.cc.shu.edu.cn/) [CG辅助教学](http://cg.hoc.ccshu.net/)
+### **网络相关** | Network
+***
+[VPN](https://vpn.shu.edu.cn/) [无线网络](https://wlan.shu.edu.cn/) [IPv6](https://ipv6.shu.edu.cn/) [电脑软件](https://its.shu.edu.cn/xzzq.htm) [信息化系统](http://services.shu.edu.cn/) [PIM](http://pim.shu.edu.cn/taskcenter/home) [开源社区](http://osc.shu.edu.cn/) --></description></item></channel></rss>
