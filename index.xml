@@ -1,146 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Luminolt</title><link>https://example.com/</link><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml"/><description>Luminolt</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jun 2022 18:52:53 +0800</lastBuildDate><image><url>https://example.com/media/icon_hu1b90dea3b5752ec4ed6154c0dc881a21_30314_512x512_fill_lanczos_center_3.png</url><title>Luminolt</title><link>https://example.com/</link></image><item><title>(CN) An Breif Introduction to Cryptography</title><link>https://example.com/post/cryptography-guide/</link><pubDate>Tue, 21 Jun 2022 18:52:53 +0800</pubDate><guid>https://example.com/post/cryptography-guide/</guid><description>&lt;h2 id="什么是密码学">什么是密码学？&lt;/h2>
-&lt;p>密码学是数学和计算机科学的交叉学科。在国内一般作为
-信息安全专业的必修课程。密码学的开端是Shannon在1945年发表的《Communication Theory of Secrecy Systems》而在这之前，密码更像是一种技艺（Art）而非一种科学技术（Technique）。&lt;/p>
-&lt;blockquote>
-&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>
-&lt;/blockquote>
-&lt;p>按照Shannon理论，密码学可分为两个阶段：&lt;/p>
-&lt;ul>
-&lt;li>古典密码学：基于巧妙构造形成的Art&lt;/li>
-&lt;li>现代密码学：基于数学原理形成的Technique&lt;/li>
-&lt;/ul>
-&lt;h2 id="古典密码学">古典密码学&lt;/h2>
-&lt;p>一种比较有趣的，并且能在影视剧中看到的古典密码叫做滚筒密码。滚筒密码的加密原理就是双方规定好木棍的直径，写信人把腰带绑在木棍上书写，在收信人收到信之后，只需要把腰带绑到相同规格的木棍上就能还原信的内容。&lt;/p>
-&lt;p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="https://nic.sdufe.edu.cn/__local/3/B1/28/67F57C5431D87E41BCC727F9364_90183162_2CDE.jpg" alt="滚筒密码" loading="lazy" data-zoomable />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;/p>
-&lt;p>如果用现代密码学的语言去描述，信件的内容即为明文，通过滚筒写出来的纸片就是明文，而密钥就是那根木棍。&lt;/p>
-&lt;p>而实质上我们可以发现，我们是在对一个字符串间隔取字符：
-例如对串：&lt;code>Hello-Crypto!&lt;/code>，我们把他写在正四棱柱形成的纸带上，就可以获得：&lt;code>Hoy!e-plCtlro&lt;/code>，而这和隔4个字符1取的操作是一样的，我们可以给出一个形式化的代码实现：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="k">def&lt;/span> &lt;span class="nf">encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">msg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">splitted_str&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="p">)]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="nb">iter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">ch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">msg&lt;/span>&lt;span class="p">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">splitted_str&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nb">iter&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ch&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="nb">iter&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">cipher&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">cipher&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">splitted_str&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hello-Crypto!&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;Hoy!e-plCtlro&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而事实上，这就是一个栅栏密码，你可以在&lt;a href="https://www.qqxiuzi.cn/bianma/zhalanmima.php" target="_blank" rel="noopener">这个网站&lt;/a>上尝试。&lt;/p>
-&lt;blockquote>
-&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>
-&lt;/blockquote>
-&lt;p>而这就是古典密码学从最原始的的阶段，步入了近现代的阶段。从一些工具的使用，变成了算数。在此基础上形成了大量的替换密码（如Caesar密码、Vigenère密码）。&lt;/p>
-&lt;blockquote>
-&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="现代密码学">现代密码学&lt;/h2>
-&lt;p>现代密码学的开端是Shannon的那篇文章，其中提出了一个重要的概念，完美安全性（Perfect Security）。完美安全性的形式化定义用到了概率论的知识，因此此处不展开。我们仅对其产生的原因进行一些阐述。&lt;/p>
-&lt;p>古典密码在当时基本全都被破解了，密码欠缺一个正式的、准确的定义去衡量证明一个密码方案是否具有严格的安全性，因此Shannon理论应运而生。&lt;/p>
-&lt;p>一个密码体系保证完美安全性，当其加密后的密文不会透露任何关于明文的信息。而在这种定义下，即使攻击者拥有无穷的算力，也不能被破解。&lt;/p>
-&lt;blockquote>
-&lt;p>😮注意，是无穷的算力！&lt;/p>
-&lt;/blockquote>
-&lt;p>但是根据Shannon的推论，一个保证完美安全性的密码体系，其密钥空间一定大于明文空间。也就是说，我的密钥不会比明文更短。而我们可以思考，如果有一个信道，可以安全的用于传输密钥，为什么不直接拿来传输明文呢？因此目前的密码体系都&lt;strong>不保证&lt;/strong>完美安全性。&lt;/p>
-&lt;p>而在这基础上，就催生了流密码和分块密码，他们被统称为对称密码学。总的来说，对称密码学致力于让短密钥经过一些神奇的操作，也可以发挥和长密钥相同的作用：&lt;/p>
-&lt;ul>
-&lt;li>流密码：通过随机数生成器序列，生成长密钥&lt;/li>
-&lt;li>分块密码：通过对明文分块，逐一用短密钥加密&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>
-&lt;/blockquote>
-&lt;p>而与之对应的，是非对称密码学（又称为公钥密码学），该类密码体系的特点是拥有公钥和私钥两个密钥，他们往往基于数学上的难题进行规约：&lt;/p>
-&lt;ul>
-&lt;li>RSA：大数质因数分解难题&lt;/li>
-&lt;li>ElGamal：模乘群上的离散对数问题&lt;/li>
-&lt;li>ECC-ElGamal：椭圆曲线加法群上的离散对数问题&lt;/li>
-&lt;/ul>
-&lt;p>一个简单的例子是，给定两个大质数 $p, q$ ，给你他们的乘积 $N = pq$ ，你是很难分别求解出 $p$ 和 $q$ 的。&lt;/p>
-&lt;blockquote>
-&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>
-&lt;/blockquote>
-&lt;p>而这种数学上的难解特性就可以被利用，构造密码体系。&lt;/p>
-&lt;blockquote>
-&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="小结">小结&lt;/h2>
-&lt;p>事实上，上面两个问题都只解决了数据隐秘性的保护，不一定能够保证数据仍是完整的、未被篡改过的。而这就需要更多的知识，包括：&lt;/p>
-&lt;ul>
-&lt;li>消息认证码&lt;/li>
-&lt;li>数字签名&lt;/li>
-&lt;/ul>
-&lt;p>而目前随着量子计算机的出现，Shor算法已经从理论上证明了能够在多项式时间内攻破目前常见的密码体系，于是又有了一些后量子密码学的研究：&lt;/p>
-&lt;ul>
-&lt;li>格密码学&lt;/li>
-&lt;li>编码密码学&lt;/li>
-&lt;/ul>
-&lt;p>当然还有一些和其他方向的交叉，如：&lt;/p>
-&lt;ul>
-&lt;li>区块链（散列和共识机制）&lt;/li>
-&lt;li>安全多方计算（联邦学习）&lt;/li>
-&lt;li>零知识证明&lt;/li>
-&lt;/ul>
-&lt;h2 id="学习路线">学习路线&lt;/h2>
-&lt;p>笔者的学习路线是：密码基础-数学基础-现代密码学，比较诡异，下面整理一下比较正常的路线：&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Luminolt</title><link>https://example.com/</link><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml"/><description>Luminolt</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><image><url>https://example.com/media/icon_hu1b90dea3b5752ec4ed6154c0dc881a21_30314_512x512_fill_lanczos_center_3.png</url><title>Luminolt</title><link>https://example.com/</link></image><item><title>2023 Crypto Camp</title><link>https://example.com/project/2023-summer-crypto-project/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://example.com/project/2023-summer-crypto-project/</guid><description>&lt;p>本项目为面向上海大学网络空间安全专业本科生（2020级、2021级）的暑期实训课程，共8课时。内容包括：&lt;/p>
 &lt;ol>
-&lt;li>数学基础：离散数学、数论、近世代数、概率论&lt;/li>
-&lt;li>古典密码学：了解代换密码&lt;/li>
-&lt;li>对称密码学：流密码、对称密码、PRG、PRF&lt;/li>
-&lt;li>非对称密码学：Diffie-Hellman密钥交换、陷门函数、RSA、ElGamal、同态加密&lt;/li>
-&lt;li>应用密码学：哈希函数、消息认证码、数字签名&lt;/li>
+&lt;li>密码和编码&lt;/li>
+&lt;li>古典密码&lt;/li>
+&lt;li>对称密码&lt;/li>
+&lt;li>Hash 函数&lt;/li>
+&lt;li>近世代数和数论&lt;/li>
+&lt;li>非对称密码&lt;/li>
+&lt;li>范畴论和同态加密&lt;/li>
+&lt;li>格论和格密码&lt;/li>
 &lt;/ol>
-&lt;p>推荐一些书目：&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="http://www.cs.umd.edu/~jkatz/imc.html#:~:text=Introduction%20to%20Modern%20Cryptography%20is%20an%20introductory-level%20treatment,without%20sacrificing%20rigor%20or%20an%20emphasis%20on%20foundations." target="_blank" rel="noopener">Introduction to Modern Cryptography&lt;/a>, Jonathan Katz and Yehuda Lindell&lt;/li>
-&lt;li>初等数论, 潘承洞、潘承彪&lt;/li>
-&lt;li>抽象代数学, 姚慕生&lt;/li>
-&lt;/ul></description></item><item><title>Friend Link</title><link>https://example.com/friend/</link><pubDate>Fri, 17 Jun 2022 00:30:31 +0800</pubDate><guid>https://example.com/friend/</guid><description>&lt;p>The following links are from my friends, you can check their personal page.&lt;/p>
-&lt;hr>
-&lt;p>&lt;a href="https://chasing1020.github.io/" target="_blank" rel="noopener">Chasing&lt;/a>, Gopher, Major in Computer Science, SHU&lt;/p>
-&lt;p>&lt;a href="https://siyangshao.github.io/message/" target="_blank" rel="noopener">Shaosy&lt;/a>, ACMer, Major in Computer Engineering, NTU&lt;/p>
-&lt;hr></description></item><item><title>Tool</title><link>https://example.com/tool/</link><pubDate>Fri, 17 Jun 2022 00:24:07 +0800</pubDate><guid>https://example.com/tool/</guid><description>&lt;h3 id="shu-导航--shu-re-direction">&lt;strong>SHU 导航&lt;/strong> | SHU Re-direction&lt;/h3>
-&lt;hr>
-&lt;p>&lt;a href="https://www.shu.edu.cn/" target="_blank" rel="noopener">官网&lt;/a> &lt;a href="http://newmail.shu.edu.cn/" target="_blank" rel="noopener">邮箱&lt;/a> &lt;a href="http://202.120.117.231:8991/F/YP82FYYBJHBUMFXQSY6NRQGC898HCNJVK8M41AQAL1I169KJQG-08364?&amp;amp;pds_handle=GUEST" target="_blank" rel="noopener">书籍查询&lt;/a> &lt;a href="http://www.elearning.shu.edu.cn/portal" target="_blank" rel="noopener">网络课程&lt;/a> &lt;a href="http://pim.shu.edu.cn/taskcenter/home" target="_blank" rel="noopener">PIM&lt;/a> &lt;a href="https://eportal.shu.edu.cn/" target="_blank" rel="noopener">一网通办&lt;/a> &lt;a href="https://xk2.zkllab.com/" target="_blank" rel="noopener">选课助手&lt;/a> &lt;a href="http://www.xk.shu.edu.cn/" target="_blank" rel="noopener">在线选课&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://10.10.9.139/client/cloudPrint.html" target="_blank" rel="noopener">图书馆云打印&lt;/a> &lt;a href="http://acmoj.shu.edu.cn/problems/" target="_blank" rel="noopener">ACM-OJ&lt;/a> &lt;a href="https://www.luogu.com.cn/problem/list" target="_blank" rel="noopener">洛谷&lt;/a> &lt;a href="http://nhce.shu.edu.cn/" target="_blank" rel="noopener">视听说英语平台&lt;/a> &lt;a href="http://www.jwc.shu.edu.cn/2020wangluokongjiananquanzhizhao.pdf" target="_blank" rel="noopener">网安培养方案&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://jwb.shu.edu.cn/" target="_blank" rel="noopener">教务部&lt;/a>&lt;/p>
-&lt;h3 id="密码学工具--cryptography-tools">密码学工具 | Cryptography Tools&lt;/h3>
-&lt;hr>
-&lt;div class="row mt-2"
-style="margin-left: 0px;
-margin-right: 0px">
-&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
-style="margin-top: 20px">
-&lt;a href="https://www.sagemath.org/index.html">
-&lt;img width="250" height="65" alt="SageMath Logo" class="round raised" src="https://picgo-1303220879.cos.ap-shanghai.myqcloud.com//img20230331042448.png" title="SageMath Mathematical Software">
-&lt;/a>
-&lt;text style="text-align: center"> SageMath: Mathematical Software &lt;/text>
-&lt;/div>
-&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
-style="margin-top: 20px">
-&lt;a href="https://www.sagemath.org/index.html">
-&lt;img width="65" height="65" alt="SageMath Logo" class="round raised" src="https://pypi.org/static/images/logo-small.2a411bc6.svg" title="SageMath Mathematical Software">
-&lt;/a>
-&lt;text style="text-align: center"> pycryptodome: Cryptography Library for Python &lt;/text>
-&lt;/div>
-&lt;/div>
-&lt;!-- ### **校园生活** | Campus
-***
-[一网通办](https://eportal.shu.edu.cn/) [校历](https://www.shu.edu.cn/bzap.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1233) [后勤](https://hq.shu.edu.cn/fwzn.htm) [成就](http://www.act.shu.edu.cn/) [网上支付 ](https://pay.shu.edu.cn/SPPMain/) [校园应用](https://eportal.shu.edu.cn/apps/) [空闲教室](https://cj.shu.edu.cn/RoomUse/RoomUseDate/) [地图](http://map.shu.edu.cn/App/MapViewer?starter=001)[博物馆](http://www.museum.shu.edu.cn/index.php) [图书馆](https://lib.shu.edu.cn/)
-[孰知 ](http://www.sz.shu.edu.cn/Index.aspx) [电话黄页](https://www.shu.edu.cn/dhcx.htm) [校医院](https://www.xyy.shu.edu.cn/) [财务处](https://xssf.shu.edu.cn:8088/LocalLogin.aspx) [乐乎论坛](http://bbs.lehu.shu.edu.cn/) [学生社区管理](http://www.sq.shu.edu.cn/) [通知公告](https://zdpyc.shu.edu.cn/tzgglist.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1014) [专业信息公开](http://zyinfo.shu.edu.cn/)
-### **课程学习** | Curriculum
-***
-[网络课程](http://www.elearning.shu.edu.cn/portal) [泛雅(学习通网页版)](http://passport2.chaoxing.com/login?refer=http%3A%2F%2Fmooc2-ans.chaoxing.com%2Fmycourse%2Fstu%3Fcourseid%3D214190837%26clazzid%3D31605024%26cpi%3D147391051%26enc%3D520ea1039b791b4c16d2ae13d4f6f683%26t%3D1598976159741%26pageHeader%3D0&amp;fid=145&amp;newversion=true) [成绩查询](http://cj.shu.edu.cn/) [网络选课](http://www.xk.shu.edu.cn/) [选课助手](https://xk2.zkllab.com/) [英语四六级](http://cet-bm.neea.edu.cn/)
-[计算机等级考](https://eportal.shu.edu.cn/transfer/#id=174) [转专业申请](https://zzy.shu.edu.cn/) [知识机构库](http://ir.shu.edu.cn/) [学术报告](https://eportal.shu.edu.cn/calendar/#type=1062) [安全教育(安开)](http://ankai365.shu.edu.cn/) [易班](http://www.yiban.cn/school/index/id/5000022)
-[英语平台 ](http://nhce.shu.edu.cn/) [课程资源网站](http://class.cc.shu.edu.cn/) [教务处](http://www.jwc.shu.edu.cn/) [直录播云平台 ](http://vod.cc.shu.edu.cn/) [CG辅助教学](http://cg.hoc.ccshu.net/)
-### **网络相关** | Network
-***
-[VPN](https://vpn.shu.edu.cn/) [无线网络](https://wlan.shu.edu.cn/) [IPv6](https://ipv6.shu.edu.cn/) [电脑软件](https://its.shu.edu.cn/xzzq.htm) [信息化系统](http://services.shu.edu.cn/) [PIM](http://pim.shu.edu.cn/taskcenter/home) [开源社区](http://osc.shu.edu.cn/) --></description></item><item><title>Slides</title><link>https://example.com/slides/example/</link><pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate><guid>https://example.com/slides/example/</guid><description>&lt;style>
+&lt;!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.
+Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.
+Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.
+Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at. --></description></item><item><title>A Brief Introduction to Cryptography in CTF Games</title><link>https://example.com/slides/2023-summer-crypto/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://example.com/slides/2023-summer-crypto/</guid><description>&lt;style>
 .reveal .slide-number {
 display: none;
 }
@@ -287,11 +160,149 @@ src="https://th.bing.com/th/id/OIP.yuNmwCWteG3UH5sRuIAAPgHaGX?pid=ImgDet&amp;rs=
 &lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
 &lt;li>Supports speaker notes&lt;/li>
 &lt;li>Mobile friendly slides&lt;/li>
-&lt;/ul></description></item><item><title>Example Project</title><link>https://example.com/project/example/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://example.com/project/example/</guid><description>&lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p>
-&lt;p>Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p>
-&lt;p>Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p>
-&lt;p>Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p>
-&lt;p>Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p></description></item><item><title>An example conference paper</title><link>https://example.com/publication/example/</link><pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate><guid>https://example.com/publication/example/</guid><description>&lt;div class="alert alert-note">
+&lt;/ul></description></item><item><title>(CN) An Breif Introduction to Cryptography</title><link>https://example.com/post/cryptography-guide/</link><pubDate>Tue, 21 Jun 2022 18:52:53 +0800</pubDate><guid>https://example.com/post/cryptography-guide/</guid><description>&lt;h2 id="什么是密码学">什么是密码学？&lt;/h2>
+&lt;p>密码学是数学和计算机科学的交叉学科。在国内一般作为
+信息安全专业的必修课程。密码学的开端是Shannon在1945年发表的《Communication Theory of Secrecy Systems》而在这之前，密码更像是一种技艺（Art）而非一种科学技术（Technique）。&lt;/p>
+&lt;blockquote>
+&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;p>按照Shannon理论，密码学可分为两个阶段：&lt;/p>
+&lt;ul>
+&lt;li>古典密码学：基于巧妙构造形成的Art&lt;/li>
+&lt;li>现代密码学：基于数学原理形成的Technique&lt;/li>
+&lt;/ul>
+&lt;h2 id="古典密码学">古典密码学&lt;/h2>
+&lt;p>一种比较有趣的，并且能在影视剧中看到的古典密码叫做滚筒密码。滚筒密码的加密原理就是双方规定好木棍的直径，写信人把腰带绑在木棍上书写，在收信人收到信之后，只需要把腰带绑到相同规格的木棍上就能还原信的内容。&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://nic.sdufe.edu.cn/__local/3/B1/28/67F57C5431D87E41BCC727F9364_90183162_2CDE.jpg" alt="滚筒密码" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>如果用现代密码学的语言去描述，信件的内容即为明文，通过滚筒写出来的纸片就是明文，而密钥就是那根木棍。&lt;/p>
+&lt;p>而实质上我们可以发现，我们是在对一个字符串间隔取字符：
+例如对串：&lt;code>Hello-Crypto!&lt;/code>，我们把他写在正四棱柱形成的纸带上，就可以获得：&lt;code>Hoy!e-plCtlro&lt;/code>，而这和隔4个字符1取的操作是一样的，我们可以给出一个形式化的代码实现：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="k">def&lt;/span> &lt;span class="nf">encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">msg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">splitted_str&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="nb">iter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">ch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">msg&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">splitted_str&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nb">iter&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ch&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="nb">iter&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">cipher&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span> &lt;span class="n">cipher&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">splitted_str&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hello-Crypto!&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;Hoy!e-plCtlro&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而事实上，这就是一个栅栏密码，你可以在&lt;a href="https://www.qqxiuzi.cn/bianma/zhalanmima.php" target="_blank" rel="noopener">这个网站&lt;/a>上尝试。&lt;/p>
+&lt;blockquote>
+&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>
+&lt;/blockquote>
+&lt;p>而这就是古典密码学从最原始的的阶段，步入了近现代的阶段。从一些工具的使用，变成了算数。在此基础上形成了大量的替换密码（如Caesar密码、Vigenère密码）。&lt;/p>
+&lt;blockquote>
+&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="现代密码学">现代密码学&lt;/h2>
+&lt;p>现代密码学的开端是Shannon的那篇文章，其中提出了一个重要的概念，完美安全性（Perfect Security）。完美安全性的形式化定义用到了概率论的知识，因此此处不展开。我们仅对其产生的原因进行一些阐述。&lt;/p>
+&lt;p>古典密码在当时基本全都被破解了，密码欠缺一个正式的、准确的定义去衡量证明一个密码方案是否具有严格的安全性，因此Shannon理论应运而生。&lt;/p>
+&lt;p>一个密码体系保证完美安全性，当其加密后的密文不会透露任何关于明文的信息。而在这种定义下，即使攻击者拥有无穷的算力，也不能被破解。&lt;/p>
+&lt;blockquote>
+&lt;p>😮注意，是无穷的算力！&lt;/p>
+&lt;/blockquote>
+&lt;p>但是根据Shannon的推论，一个保证完美安全性的密码体系，其密钥空间一定大于明文空间。也就是说，我的密钥不会比明文更短。而我们可以思考，如果有一个信道，可以安全的用于传输密钥，为什么不直接拿来传输明文呢？因此目前的密码体系都&lt;strong>不保证&lt;/strong>完美安全性。&lt;/p>
+&lt;p>而在这基础上，就催生了流密码和分块密码，他们被统称为对称密码学。总的来说，对称密码学致力于让短密钥经过一些神奇的操作，也可以发挥和长密钥相同的作用：&lt;/p>
+&lt;ul>
+&lt;li>流密码：通过随机数生成器序列，生成长密钥&lt;/li>
+&lt;li>分块密码：通过对明文分块，逐一用短密钥加密&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>
+&lt;/blockquote>
+&lt;p>而与之对应的，是非对称密码学（又称为公钥密码学），该类密码体系的特点是拥有公钥和私钥两个密钥，他们往往基于数学上的难题进行规约：&lt;/p>
+&lt;ul>
+&lt;li>RSA：大数质因数分解难题&lt;/li>
+&lt;li>ElGamal：模乘群上的离散对数问题&lt;/li>
+&lt;li>ECC-ElGamal：椭圆曲线加法群上的离散对数问题&lt;/li>
+&lt;/ul>
+&lt;p>一个简单的例子是，给定两个大质数 $p, q$ ，给你他们的乘积 $N = pq$ ，你是很难分别求解出 $p$ 和 $q$ 的。&lt;/p>
+&lt;blockquote>
+&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>
+&lt;/blockquote>
+&lt;p>而这种数学上的难解特性就可以被利用，构造密码体系。&lt;/p>
+&lt;blockquote>
+&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="小结">小结&lt;/h2>
+&lt;p>事实上，上面两个问题都只解决了数据隐秘性的保护，不一定能够保证数据仍是完整的、未被篡改过的。而这就需要更多的知识，包括：&lt;/p>
+&lt;ul>
+&lt;li>消息认证码&lt;/li>
+&lt;li>数字签名&lt;/li>
+&lt;/ul>
+&lt;p>而目前随着量子计算机的出现，Shor算法已经从理论上证明了能够在多项式时间内攻破目前常见的密码体系，于是又有了一些后量子密码学的研究：&lt;/p>
+&lt;ul>
+&lt;li>格密码学&lt;/li>
+&lt;li>编码密码学&lt;/li>
+&lt;/ul>
+&lt;p>当然还有一些和其他方向的交叉，如：&lt;/p>
+&lt;ul>
+&lt;li>区块链（散列和共识机制）&lt;/li>
+&lt;li>安全多方计算（联邦学习）&lt;/li>
+&lt;li>零知识证明&lt;/li>
+&lt;/ul>
+&lt;h2 id="学习路线">学习路线&lt;/h2>
+&lt;p>笔者的学习路线是：密码基础-数学基础-现代密码学，比较诡异，下面整理一下比较正常的路线：&lt;/p>
+&lt;ol>
+&lt;li>数学基础：离散数学、数论、近世代数、概率论&lt;/li>
+&lt;li>古典密码学：了解代换密码&lt;/li>
+&lt;li>对称密码学：流密码、对称密码、PRG、PRF&lt;/li>
+&lt;li>非对称密码学：Diffie-Hellman密钥交换、陷门函数、RSA、ElGamal、同态加密&lt;/li>
+&lt;li>应用密码学：哈希函数、消息认证码、数字签名&lt;/li>
+&lt;/ol>
+&lt;p>推荐一些书目：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.cs.umd.edu/~jkatz/imc.html#:~:text=Introduction%20to%20Modern%20Cryptography%20is%20an%20introductory-level%20treatment,without%20sacrificing%20rigor%20or%20an%20emphasis%20on%20foundations." target="_blank" rel="noopener">Introduction to Modern Cryptography&lt;/a>, Jonathan Katz and Yehuda Lindell&lt;/li>
+&lt;li>初等数论, 潘承洞、潘承彪&lt;/li>
+&lt;li>抽象代数学, 姚慕生&lt;/li>
+&lt;/ul></description></item><item><title>Friend Link</title><link>https://example.com/friend/</link><pubDate>Fri, 17 Jun 2022 00:30:31 +0800</pubDate><guid>https://example.com/friend/</guid><description>&lt;p>The following links are from my friends, you can check their personal page.&lt;/p>
+&lt;hr>
+&lt;p>&lt;a href="https://chasing1020.github.io/" target="_blank" rel="noopener">Chasing&lt;/a>, Gopher, Major in Computer Science, SHU&lt;/p>
+&lt;p>&lt;a href="https://siyangshao.github.io/message/" target="_blank" rel="noopener">Shaosy&lt;/a>, ACMer, Major in Computer Engineering, NTU&lt;/p>
+&lt;hr></description></item><item><title>Tool</title><link>https://example.com/tool/</link><pubDate>Fri, 17 Jun 2022 00:24:07 +0800</pubDate><guid>https://example.com/tool/</guid><description>&lt;h3 id="shu-导航--shu-re-direction">&lt;strong>SHU 导航&lt;/strong> | SHU Re-direction&lt;/h3>
+&lt;hr>
+&lt;p>&lt;a href="https://www.shu.edu.cn/" target="_blank" rel="noopener">官网&lt;/a> &lt;a href="http://newmail.shu.edu.cn/" target="_blank" rel="noopener">邮箱&lt;/a> &lt;a href="http://202.120.117.231:8991/F/YP82FYYBJHBUMFXQSY6NRQGC898HCNJVK8M41AQAL1I169KJQG-08364?&amp;amp;pds_handle=GUEST" target="_blank" rel="noopener">书籍查询&lt;/a> &lt;a href="http://www.elearning.shu.edu.cn/portal" target="_blank" rel="noopener">网络课程&lt;/a> &lt;a href="http://pim.shu.edu.cn/taskcenter/home" target="_blank" rel="noopener">PIM&lt;/a> &lt;a href="https://eportal.shu.edu.cn/" target="_blank" rel="noopener">一网通办&lt;/a> &lt;a href="https://xk2.zkllab.com/" target="_blank" rel="noopener">选课助手&lt;/a> &lt;a href="http://www.xk.shu.edu.cn/" target="_blank" rel="noopener">在线选课&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://10.10.9.139/client/cloudPrint.html" target="_blank" rel="noopener">图书馆云打印&lt;/a> &lt;a href="http://acmoj.shu.edu.cn/problems/" target="_blank" rel="noopener">ACM-OJ&lt;/a> &lt;a href="https://www.luogu.com.cn/problem/list" target="_blank" rel="noopener">洛谷&lt;/a> &lt;a href="http://nhce.shu.edu.cn/" target="_blank" rel="noopener">视听说英语平台&lt;/a> &lt;a href="http://www.jwc.shu.edu.cn/2020wangluokongjiananquanzhizhao.pdf" target="_blank" rel="noopener">网安培养方案&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://jwb.shu.edu.cn/" target="_blank" rel="noopener">教务部&lt;/a>&lt;/p>
+&lt;h3 id="密码学工具--cryptography-tools">密码学工具 | Cryptography Tools&lt;/h3>
+&lt;hr>
+&lt;div class="row mt-2"
+style="margin-left: 0px;
+margin-right: 0px">
+&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
+style="margin-top: 20px">
+&lt;a href="https://www.sagemath.org/index.html">
+&lt;img width="250" height="65" alt="SageMath Logo" class="round raised" src="https://picgo-1303220879.cos.ap-shanghai.myqcloud.com//img20230331042448.png" title="SageMath Mathematical Software">
+&lt;/a>
+&lt;text style="text-align: center"> SageMath: Mathematical Software &lt;/text>
+&lt;/div>
+&lt;div class="col-12 col-md-6 col-xl-5 card-simple view-card"
+style="margin-top: 20px">
+&lt;a href="https://www.sagemath.org/index.html">
+&lt;img width="65" height="65" alt="SageMath Logo" class="round raised" src="https://pypi.org/static/images/logo-small.2a411bc6.svg" title="SageMath Mathematical Software">
+&lt;/a>
+&lt;text style="text-align: center"> pycryptodome: Cryptography Library for Python &lt;/text>
+&lt;/div>
+&lt;/div>
+&lt;!-- ### **校园生活** | Campus
+***
+[一网通办](https://eportal.shu.edu.cn/) [校历](https://www.shu.edu.cn/bzap.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1233) [后勤](https://hq.shu.edu.cn/fwzn.htm) [成就](http://www.act.shu.edu.cn/) [网上支付 ](https://pay.shu.edu.cn/SPPMain/) [校园应用](https://eportal.shu.edu.cn/apps/) [空闲教室](https://cj.shu.edu.cn/RoomUse/RoomUseDate/) [地图](http://map.shu.edu.cn/App/MapViewer?starter=001)[博物馆](http://www.museum.shu.edu.cn/index.php) [图书馆](https://lib.shu.edu.cn/)
+[孰知 ](http://www.sz.shu.edu.cn/Index.aspx) [电话黄页](https://www.shu.edu.cn/dhcx.htm) [校医院](https://www.xyy.shu.edu.cn/) [财务处](https://xssf.shu.edu.cn:8088/LocalLogin.aspx) [乐乎论坛](http://bbs.lehu.shu.edu.cn/) [学生社区管理](http://www.sq.shu.edu.cn/) [通知公告](https://zdpyc.shu.edu.cn/tzgglist.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1014) [专业信息公开](http://zyinfo.shu.edu.cn/)
+### **课程学习** | Curriculum
+***
+[网络课程](http://www.elearning.shu.edu.cn/portal) [泛雅(学习通网页版)](http://passport2.chaoxing.com/login?refer=http%3A%2F%2Fmooc2-ans.chaoxing.com%2Fmycourse%2Fstu%3Fcourseid%3D214190837%26clazzid%3D31605024%26cpi%3D147391051%26enc%3D520ea1039b791b4c16d2ae13d4f6f683%26t%3D1598976159741%26pageHeader%3D0&amp;fid=145&amp;newversion=true) [成绩查询](http://cj.shu.edu.cn/) [网络选课](http://www.xk.shu.edu.cn/) [选课助手](https://xk2.zkllab.com/) [英语四六级](http://cet-bm.neea.edu.cn/)
+[计算机等级考](https://eportal.shu.edu.cn/transfer/#id=174) [转专业申请](https://zzy.shu.edu.cn/) [知识机构库](http://ir.shu.edu.cn/) [学术报告](https://eportal.shu.edu.cn/calendar/#type=1062) [安全教育(安开)](http://ankai365.shu.edu.cn/) [易班](http://www.yiban.cn/school/index/id/5000022)
+[英语平台 ](http://nhce.shu.edu.cn/) [课程资源网站](http://class.cc.shu.edu.cn/) [教务处](http://www.jwc.shu.edu.cn/) [直录播云平台 ](http://vod.cc.shu.edu.cn/) [CG辅助教学](http://cg.hoc.ccshu.net/)
+### **网络相关** | Network
+***
+[VPN](https://vpn.shu.edu.cn/) [无线网络](https://wlan.shu.edu.cn/) [IPv6](https://ipv6.shu.edu.cn/) [电脑软件](https://its.shu.edu.cn/xzzq.htm) [信息化系统](http://services.shu.edu.cn/) [PIM](http://pim.shu.edu.cn/taskcenter/home) [开源社区](http://osc.shu.edu.cn/) --></description></item><item><title>An example conference paper</title><link>https://example.com/publication/example/</link><pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate><guid>https://example.com/publication/example/</guid><description>&lt;div class="alert alert-note">
 &lt;div>
 Click the &lt;em>Cite&lt;/em> button above to demo the feature to enable visitors to import publication metadata into their reference management software.
 &lt;/div>
