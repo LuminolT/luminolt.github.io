@@ -27,122 +27,485 @@ letter-spacing: normal;
 &lt;p>Chenghao Chen | 2022.6&lt;/p>
 &lt;p>Shanghai University&lt;/p>
 &lt;hr>
-&lt;h2 id="outline">Outline&lt;/h2>
+&lt;h2 id="outline">Outline?!&lt;/h2>
+&lt;br>
 &lt;ol>
 &lt;li>密码和编码&lt;/li>
-&lt;li>古典密码&lt;/li>
-&lt;li>对称密码&lt;/li>
+&lt;li>古典密码学&lt;/li>
+&lt;li>对称密码学&lt;/li>
 &lt;li>Hash 函数&lt;/li>
-&lt;li>⭐ 近世代数和数论&lt;/li>
-&lt;li>⭐ 非对称密码&lt;/li>
-&lt;li>※ 范畴论和同态加密&lt;/li>
-&lt;li>※ 格论和格密码&lt;/li>
+&lt;li>近世代数和数论&lt;/li>
+&lt;li>非对称密码&lt;/li>
+&lt;li>范畴论和同态加密&lt;/li>
+&lt;li>格论和格密码&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img style="position: absolute; right: 30%; top: 50%; transform: translate(50%, -50%);"
+width="25%"
+src="https://picx.zhimg.com/80/v2-90f3ef45d2fbbd492dd36def9c1e5f53_720w.webp?source=1940ef5c">&lt;/p>
+&lt;hr>
+&lt;h2 id="outline-1">Outline&lt;/h2>
+&lt;p>&lt;br>&lt;br>&lt;/p>
+&lt;ol>
+&lt;li>密码和编码&lt;/li>
+&lt;li>近世代数和数论&lt;/li>
+&lt;li>非对称密码-RSA&lt;/li>
+&lt;li>Challenges&lt;/li>
 &lt;/ol>
 &lt;!-- 增加一个图片在右方 -->
-&lt;p>&lt;img style="position: absolute; right: 30%; top: 50%; transform: translate(50%, -50%);"
+&lt;p>&lt;img style="position: absolute; right: 30%; top: 65%; transform: translate(50%, -50%);"
 width="25%"
 src="https://th.bing.com/th/id/OIP.yuNmwCWteG3UH5sRuIAAPgHaGX?pid=ImgDet&amp;rs=1">&lt;/p>
 &lt;hr>
 &lt;div class="middle center">
 &lt;div style="width: 100%">
 &lt;h1 id="l1-密码和编码">L1. 密码和编码&lt;/h1>
-&lt;p>实际上是一个引言，并且介绍了 ancient 神必编码题目&lt;/p>
+&lt;p>实际上是一个引言，并且介绍了 ancient 神必编码&lt;/p>
 &lt;hr>
-&lt;h2 id="11-features">1.1 Features&lt;/h2>
+&lt;h2 id="11-一些会被搞混的术语">1.1 一些会被搞混的术语&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>密码（Cryptography）：用于保护信息安全的过程
+&lt;ul>
+&lt;li>&lt;code>Encrypt(k, m)&lt;/code>&lt;/li>
+&lt;li>&lt;code>Decrypt(k, c)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>编码（Code Theory）：信息转换为不同形式的过程
+&lt;ul>
+&lt;li>&lt;code>Encode(m)&lt;/code>&lt;/li>
+&lt;li>&lt;code>Decode(e)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>口令（Password）：用户登录的凭证&lt;/li>
+&lt;li>散列（Hash）：（抗碰撞的）单向的压缩函数&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="12-常见编码方法">1.2 常见编码方法&lt;/h2>
+&lt;p>实用编码方法：&lt;/p>
+&lt;ul>
+&lt;li>字符编码：ASCII, Unicode&lt;/li>
+&lt;li>二进制数据编码：base, Hex&lt;/li>
+&lt;li>URL编码：e.g. &lt;code>' '&lt;/code> -&amp;gt; &lt;code>%20&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>玩具编码方法：&lt;/p>
+&lt;ul>
+&lt;li>与佛论禅：e.g. 佛曰：俱利知曳罰陀那無呐諦梵多不僧室得諳有呐跋姪阿&lt;/li>
+&lt;li>兽音译者：e.g. ~呜嗷呜呜呜呜~啊啊啊啊&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="121-字符编码转换错误">1.2.1 字符编码转换错误&lt;/h2>
+&lt;p>（一种比较古老的题目）&lt;/p>
+&lt;ul>
+&lt;li>古早的时候编码标准不统一，会产生乱码&lt;/li>
+&lt;li>GBK, BIG5, UTF-8&lt;/li>
+&lt;li>e.g.:
+&lt;ul>
+&lt;li>（打开编码 UTF-8）��ѽѽѽѽѽѽ&lt;/li>
+&lt;li>（实际编码GBK）哇呀呀呀呀呀呀&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="122-锟斤拷">1.2.2 锟斤拷&lt;/h2>
+&lt;ul>
+&lt;li>Replacement Character �&lt;/li>
+&lt;/ul>
+&lt;p>🤔 锟斤拷&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="s1">&amp;#39;�&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;utf-8&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\xef\xbf\xbd&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="s1">&amp;#39;锟斤拷&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;gbk&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\xef\xbf\xbd\xef\xbf\xbd&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>🤷随着文本替换，信息丢失&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="123-base64">1.2.3 base64&lt;/h2>
+&lt;p>base64&lt;/p>
+&lt;ul>
+&lt;li>二进制-文本间的编码方法&lt;/li>
+&lt;li>64个编码字符（&lt;code>'A-Za-z0-9+/'&lt;/code>）&lt;/li>
+&lt;li>$64 = 2^6$，因而 base64 编码的码字可以表示6个bit的信息&lt;/li>
+&lt;li>（&lt;a href="https://c.runoob.com/front-end/693/" target="_blank" rel="noopener">编码表&lt;/a>）&lt;/li>
+&lt;/ul>
+&lt;p>🤔1个ASCII编码字符 8 bit，base64 一个码字 6 bit&lt;/p>
+&lt;p>如何编码？&lt;/p>
+&lt;hr>
+&lt;h2 id="124-base64-padding">1.2.4 base64 padding&lt;/h2>
+&lt;ul>
+&lt;li>padding rule: &lt;code>'0'&lt;/code>字符填充&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@Utils.print_params&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">encode_b64_with_ascii_bin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">binary_text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">ord&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">char&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="s1">&amp;#39;08b&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">char&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">text&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">encoded_text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">b64encode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ascii&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">binary_text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">encoded_text&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">encode_b64_with_ascii_bin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Result&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;00110001&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;MQ==&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">encode_b64_with_ascii_bin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;12&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Result&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;00110001 00110010&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;MTI=&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">encode_b64_with_ascii_bin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;123&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Result&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;00110001 00110010 00110011&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;MTIz&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="124-base64-padding-contd">1.2.4 base64 padding (Cont&amp;rsquo;d)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">00110001
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">001100 01
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">001100 010000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MQ==
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">00110001 00110010
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">001100 010011 0010
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">001100 010011 001000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MTI=
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>发现等号可以考虑base64解码&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="13-哈希函数">1.3 哈希函数&lt;/h2>
+&lt;ul>
+&lt;li>典：&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img alt class="center"
+src="https://picgo-1303220879.cos.ap-shanghai.myqcloud.com//img20230613142148.png"/>&lt;/p>
+&lt;ul>
+&lt;li>哈希不是加密&lt;/li>
+&lt;li>虽然网上很多在线哈希都是加密（&lt;a href="https://www.sojson.com/md5/" target="_blank" rel="noopener">例子&lt;/a>）&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="14-彩虹表">1.4 彩虹表&lt;/h2>
+&lt;p>&lt;img alt class="center"
+src = "https://upload.wikimedia.org/wikipedia/commons/5/53/Dr._Oechslin_Rainbow_Table_Crypto_2003_Illustration.png"/>&lt;/p>
+&lt;hr>
+&lt;div class="middle center">
+&lt;div style="width: 100%">
+&lt;h1 id="l2-近世代数和数论">L2. 近世代数和数论&lt;/h1>
+&lt;p>中科院少年班招生要求：手撕大素数分解&lt;/p>
+&lt;hr>
+&lt;h2 id="21-数论">2.1 数论&lt;/h2>
+&lt;ul>
+&lt;li>整除&lt;/li>
+&lt;li>素数和互素&lt;/li>
+&lt;li>算数基本定理
+&lt;ul>
+&lt;li>$N = p_1^{a_1}p_2^{a_2}\cdots p_k^{a_k}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>最大公约数（Greatest Common Divisor, GCD）
+&lt;ul>
+&lt;li>Euclidean 算法&lt;/li>
+&lt;li>扩展 Euclidean 算法
+&lt;ul>
+&lt;li>$ax + by = \mathrm{gcd}(x, y)$&lt;/li>
+&lt;li>$ax + by = 1 \Rightarrow ax = -by + 1$&lt;/li>
+&lt;li>$\Rightarrow ax \equiv 1 (\bmod y)$ （$\mathbb{F}_p$上自然成立）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="22-模运算算数性质">2.2 模运算算数性质&lt;/h2>
+&lt;ul>
+&lt;li>let $[\cdot]$ denotes $(\cdot) \bmod n$&lt;/li>
+&lt;li>$[[a]] = [a]$&lt;/li>
+&lt;li>$[a] + [b] = [a+b]$&lt;/li>
+&lt;li>$[a] - [b] = [a-b]$&lt;/li>
+&lt;li>$[a \times b] = [[a] \times [b]]$&lt;/li>
+&lt;li>$[a^k] = [[a]^k]$&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="23-更多知识">2.3 更多知识&lt;/h2>
+&lt;ul>
+&lt;li>Fermat 小定理&lt;/li>
+&lt;li>Euler 函数&lt;/li>
+&lt;li>中国剩余定理&lt;/li>
+&lt;li>连分数&lt;/li>
+&lt;li>……&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;div class="middle center">
 &lt;div style="width: 100%">
-&lt;h1 id="l2-古典密码学">L2. 古典密码学&lt;/h1>
-&lt;p>梦开始的地方&amp;hellip;&lt;/p>
+&lt;h1 id="l3-非对称密码学">L3. 非对称密码学&lt;/h1>
+&lt;p>textbook RSA，但不会&lt;/p>
 &lt;hr>
-&lt;h2 id="21-features">2.1 Features&lt;/h2>
+&lt;h2 id="31-非对称密码学基础">3.1 非对称密码学基础&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>
+&lt;p>安全的单向陷门函数&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>利用Hash的构造……&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>↑ 在CTF中不是很重要&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>关注点：&lt;/p>
+&lt;ul>
+&lt;li>选取素数的算数特性&lt;/li>
+&lt;li>不合理的加密指数、解密指数选取&lt;/li>
+&lt;li>不合理的加密方案修改&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;div class="middle center">
-&lt;div style="width: 100%">
-&lt;h1 id="l3-对称密码">L3. 对称密码😂&lt;/h1>
-&lt;p>流和分组&lt;/p>
-&lt;hr>
-&lt;h2 id="31-features">3.1 Features&lt;/h2>
-&lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;h2 id="32-textbook-rsa">3.2 textbook RSA&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">q&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">65537&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">invert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">phi_n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;Hello, world!&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">long_to_bytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m_&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">long_to_bytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m_&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="32-textbook-rsa-contd">3.2 textbook RSA (Cont&amp;rsquo;d)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">q&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Euler 函数：小于等于$n$的与$n$互素的正整数的个数&lt;/li>
+&lt;li>$\varphi(n) = \varphi(pq) = \varphi(p) \varphi(q) = (p-1)(q-1)$&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m_&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>$(m^e \bmod n)^d \bmod n = m^{ed} \bmod n$&lt;/li>
+&lt;li>$ed = 1 \bmod \varphi(n)\Rightarrow ed = 1 + k\varphi(n)$&lt;/li>
+&lt;li>$m^{ed} \bmod n = m^{1+k\varphi(n)} \bmod n$&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;div class="middle center">
-&lt;div style="width: 100%">
-&lt;h1 id="l4-hash-函数">L4. Hash 函数&lt;/h1>
-&lt;p>典：我们用MD5对这个密码进行加密&lt;/p>
-&lt;hr>
-&lt;h2 id="41-features">4.1 Features&lt;/h2>
+&lt;h2 id="32-textbook-rsa-contd-1">3.2 textbook RSA (Cont&amp;rsquo;d)&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>$m^{ed} \bmod n = m^{1+k\varphi(n)} \bmod n$&lt;/li>
+&lt;li>$= (m \bmod n)(m^{k\varphi(n)} \bmod n) $&lt;/li>
+&lt;li>$= (m \bmod n)(m^{\varphi(n)} \bmod n)^k \bmod n $&lt;/li>
+&lt;/ul>
+&lt;p>Euler 定理：若$m$ 和$n$ 互素，则$m^{\varphi(n)}\equiv 1 (\bmod n)$&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>$n = pq, m &amp;lt; p, m &amp;lt; q$&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>$m^{ed} \bmod n = (m \bmod n) (1)^k \bmod n$&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>$= m \bmod n$&lt;/p>
+&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;div class="middle center">
-&lt;div style="width: 100%">
-&lt;h1 id="l5-近世代数和数论">L5. 近世代数和数论&lt;/h1>
-&lt;p>这就是为什么理学院这么多教授研究密码&lt;/p>
-&lt;hr>
-&lt;h2 id="51-features">5.1 Features&lt;/h2>
+&lt;h2 id="33-n-分解攻击">3.3 N 分解攻击&lt;/h2>
+&lt;p>一种显然的攻击方法&lt;/p>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>小p, q
+&lt;ul>
+&lt;li>因式分解&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>p, q 差值太小或太大
+&lt;ul>
+&lt;li>Fermat, Pollard Rho 方法分解&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>工具：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://sourceforge.net/projects/yafu/" target="_blank" rel="noopener">yafu&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.alpertron.com.ar/ECM.HTM" target="_blank" rel="noopener">Integer factorization calculator&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;div class="middle center">
-&lt;div style="width: 100%">
-&lt;h1 id="l6-非对称密码">L6. 非对称密码😅&lt;/h1>
-&lt;p>现代密码学的开端&lt;/p>
-&lt;hr>
-&lt;h2 id="61-features">6.1 Features&lt;/h2>
+&lt;h2 id="331-example-1---factor">3.3.1 Example 1 - Factor&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">secret&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">flag&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">q&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">65537&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 65537&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 60312637199635801058227385421553206347253918440828187249920737695124886809487&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 14673748133379805475254231366717984351237192567008318062632171353909225806981&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="332-example-1-try">3.3.2 Example 1 try&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>浅浅分解一下&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img alt="center" width="70%"
+src="https://picgo-1303220879.cos.ap-shanghai.myqcloud.com//img20230613164825.png"/>&lt;/p>
+&lt;ul>
+&lt;li>3分钟出结果&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;div class="middle center">
-&lt;div style="width: 100%">
-&lt;h1 id="l7-范畴论和同态加密">L7. 范畴论和同态加密&lt;/h1>
-&lt;p>上强度了&lt;/p>
-&lt;hr>
-&lt;h2 id="71-features">7.1 Features&lt;/h2>
+&lt;h2 id="333-example-1-poc">3.3.3 Example 1 poc&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">65537&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">60312637199635801058227385421553206347253918440828187249920737695124886809487&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">14673748133379805475254231366717984351237192567008318062632171353909225806981&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">197_171715_027747_339553_722339_715394_949697&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">305_888890_762796_266901_267235_667077_573071&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">invert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">phi_n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">long_to_bytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># b&amp;#39;flag{waaaaa!}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="34-小加密指数攻击">3.4 小加密指数攻击&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
+&lt;li>加密指数极小时，发生相关攻击（如$e=3$）&lt;/li>
+&lt;li>此时：
+&lt;ul>
+&lt;li>$c \equiv m^3(\bmod n)$&lt;/li>
+&lt;li>$m^3 = c + kn$&lt;/li>
+&lt;li>$m = (c+kn)^{1/3}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>攻击方法：Brute-force $k$&lt;/p>
+&lt;hr>
+&lt;h2 id="341-example-2---low-enc-exp">3.4.1 Example 2 - Low-Enc-Exp&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">secret&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">flag&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">q&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 26904410424513850825570476100349039892015194282487533873593315635034916011599061467392303815306522302238291633926964464814719214360401710146660376698471334910919067631926359580676153648632072950953163800307452838629641502897202385008108650370210545081025594811346683868462241559023145711983469942804412184091372375410284776347467254451154229882893062676381167273759770532779269018405250741326382414128740659109901734318180074363144722523208937640098203271310259652100969148051051093951864097917984729026851490884006661280087277384483099665162338506927680335934552565079554069982479529726554065109787187999302935991923&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 31850476042869993856571693940454371912053546150176657900652418191965217904787395659877&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="342-example-2-poc">3.4.2 Example 2 poc&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iroot&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">26904410424513850825570476100349039892015194282487533873593315635034916011599061467392303815306522302238291633926964464814719214360401710146660376698471334910919067631926359580676153648632072950953163800307452838629641502897202385008108650370210545081025594811346683868462241559023145711983469942804412184091372375410284776347467254451154229882893062676381167273759770532779269018405250741326382414128740659109901734318180074363144722523208937640098203271310259652100969148051051093951864097917984729026851490884006661280087277384483099665162338506927680335934552565079554069982479529726554065109787187999302935991923&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">31850476042869993856571693940454371912053546150176657900652418191965217904787395659877&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">iroot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\r&lt;/span>&lt;span class="s1"> i = &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">end&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">i&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">long_to_bytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># b&amp;#39;flag{yeahh!}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="35-共模攻击">3.5 共模攻击&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>为什么 $n$ 每次都要重新生成？&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>假设重复利用 $n$&lt;/p>
+&lt;ul>
+&lt;li>$m^{e_1}\equiv c_1(\bmod n)$&lt;/li>
+&lt;li>$m^{e_2}\equiv c_2(\bmod n)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>攻击利用扩展 Euclidean算法（$ae_1+be_2\equiv1 (\bmod n)$）&lt;/p>
+&lt;ul>
+&lt;li>此时$m^{ae_1+be_2} = c_1^{a}c_2^{b} \bmod n$&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ul>
 &lt;hr>
+&lt;h2 id="351-example-3---mod-share">3.5.1 Example 3 - Mod Share&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">secret&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">flag&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">q&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">phi_n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">q&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">64&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="n">e2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">64&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 15170797923892054990521305052012509493080568087081023750033741867542316768999951573646413753990834682138025772136109204509899638782616660243658254139599441045875522966283555995043016187825383943336990507193641549144516174056706810327582160942467845635495500282175716057977476074952304306822781341844677001797438535701007875365722512160465708455832225273446521621543823855283418665848061608565467010656663089973001969597624553258295614154262448569387247406903093192587512853122780974388687415079948784446715412138463084264315211437439421528085827503277507203193141860916227982534613135645331857382065795066181077972687&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 9576072468337167131&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 14939113163917820627&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 2513254454937818539320001229715025367247490957880668052989469295768681316833496719591412918630312453676811713071414028525870397074185767769616621123070069290764497635067026772298781749325373581840750494743329569059911576372085939972798876709058137797441729480657418587957036217376669515209286767084322875440709473172117549721159755662718590954657925357615152141194701388245440956597032994743626281679318033304014413523468865879100948882376690862202243813943679264465530741774092309002963261692618613612757084511814696332961571153968794051052454203918248339932068292297123047852899029619284314623645966095118119009347&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 111884194864476659139117439739496481475155670608279036093048194153438641356919888323493937575276768933859172174857427366301659912545016807339447507119749910478246208487569012877733924932126136220607107687643614867740936831894203006503190514539481184016080767542829000468460046831987529804871513461035761669072519101709086162745537847204230913330316446448321633091235409913844098851446548290633634428674269538902219278990312260703412892258533797387149328008600614619162876396153768090553946757954666629947494973412821804101257176286021758524844324847062425088549302146311886502815379004832574784487510491117203079999&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="352-example-3-poc">3.5.2 Example 3 poc&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">long_to_bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">invert&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gcdext&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">15170797923892054990521305052012509493080568087081023750033741867542316768999951573646413753990834682138025772136109204509899638782616660243658254139599441045875522966283555995043016187825383943336990507193641549144516174056706810327582160942467845635495500282175716057977476074952304306822781341844677001797438535701007875365722512160465708455832225273446521621543823855283418665848061608565467010656663089973001969597624553258295614154262448569387247406903093192587512853122780974388687415079948784446715412138463084264315211437439421528085827503277507203193141860916227982534613135645331857382065795066181077972687&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">9576072468337167131&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">14939113163917820627&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2513254454937818539320001229715025367247490957880668052989469295768681316833496719591412918630312453676811713071414028525870397074185767769616621123070069290764497635067026772298781749325373581840750494743329569059911576372085939972798876709058137797441729480657418587957036217376669515209286767084322875440709473172117549721159755662718590954657925357615152141194701388245440956597032994743626281679318033304014413523468865879100948882376690862202243813943679264465530741774092309002963261692618613612757084511814696332961571153968794051052454203918248339932068292297123047852899029619284314623645966095118119009347&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">c2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">111884194864476659139117439739496481475155670608279036093048194153438641356919888323493937575276768933859172174857427366301659912545016807339447507119749910478246208487569012877733924932126136220607107687643614867740936831894203006503190514539481184016080767542829000468460046831987529804871513461035761669072519101709086162745537847204230913330316446448321633091235409913844098851446548290633634428674269538902219278990312260703412892258533797387149328008600614619162876396153768090553946757954666629947494973412821804101257176286021758524844324847062425088549302146311886502815379004832574784487510491117203079999&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">gcd&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">gcdext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">m&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="nb">pow&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="n">n&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">long_to_bytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># b&amp;#39;flag{zzZzzz}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
 &lt;div class="middle center">
 &lt;div style="width: 100%">
-&lt;h1 id="l8-格论和格密码">L8. 格论和格密码&lt;/h1>
-&lt;p>感觉要讲不完了&lt;/p>
+&lt;h1 id="challenge">Challenge&lt;/h1>
+&lt;p>上强度&lt;/p>
 &lt;hr>
-&lt;h2 id="81-features">8.1 Features&lt;/h2>
+&lt;h2 id="chal1-套娃">Chal1. 套娃&lt;/h2>
 &lt;ul>
-&lt;li>Efficiently write slides in Markdown&lt;/li>
-&lt;li>3-in-1: Create, Present, and Publish your slides&lt;/li>
-&lt;li>Supports speaker notes&lt;/li>
-&lt;li>Mobile friendly slides&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;li>本题共有3个flag&lt;/li>
+&lt;li>所有flag的形式均为&lt;code>'flag{[0-9A-Za-z=_]*}'&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">新佛曰：諸隸僧降冥吽諸陀摩隸僧缽冥薩願耨咤陀
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">願羅咤喃迦祗蜜耨阿嚤僧喼所聞薩闍嚩聞念須亦心
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">耨冥心阿冥聞慧蜜咤冥心念訶冥嚩冥聞冥念降咤冥
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">劫耨降寂願慧般祗闍隸冥修阿闍莊陀冥莊冥劫莊嚴
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">冥宣隸阿摩嚩蜜心咒冥闍我須咒慧冥闍諦羅迦聞慧
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">婆劫嘚慧咒迦慧慧我慧冥闍念劫嘇隸蜜祗伏嚤慧咒
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">修缽聞色祗冥闍僧嘚迦降阿莊冥慧聞蜜降咤寂波嘇
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">塞薩如囑
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="chal2-ezrsa">Chal2. ezRSA&lt;/h2>
+&lt;ul>
+&lt;li>本题仅1个flag&lt;/li>
+&lt;li>flag的形式均为&lt;code>'flag{[0-9A-Za-z=_]*}'&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.number&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">getPrime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bytes_to_long&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">gmpy2&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">is_prime&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">invert&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">typing&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Tuple&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">secert&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">flag&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">gen_rsa_param&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">Tuple&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">rsa_encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">params&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">gen_rsa_param&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rsa_encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 5796768148637887491255587039409951397511832995737366433505141785703232675749200657380232851343254281355390391562734825283953711907092653161783752372166386&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 7948512242985881433771203281939490726039994357587772712416312873824297606161653053722572268861029945737411249803561023517431875922105282741637330609169129&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
