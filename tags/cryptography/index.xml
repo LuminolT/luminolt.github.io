@@ -1,4 +1,164 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cryptography | Chenghao Chen's Blog</title><link>https://luminolt.cn/tags/cryptography/</link><atom:link href="https://luminolt.cn/tags/cryptography/index.xml" rel="self" type="application/rss+xml"/><description>Cryptography</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 21 Nov 2024 00:00:00 +0000</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu_ed8c8d7c730e2838.png</url><title>Cryptography</title><link>https://luminolt.cn/tags/cryptography/</link></image><item><title>RISecure-PUF: Multipurpose PUF-Driven Security Extensions with Lookaside Buffer in RISC-V</title><link>https://luminolt.cn/publication/2410-risecure-puf/</link><pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2410-risecure-puf/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cryptography | Chenghao Chen's Blog</title><link>https://luminolt.cn/tags/cryptography/</link><atom:link href="https://luminolt.cn/tags/cryptography/index.xml" rel="self" type="application/rss+xml"/><description>Cryptography</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 07 Jul 2025 18:52:53 +0800</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu_ed8c8d7c730e2838.png</url><title>Cryptography</title><link>https://luminolt.cn/tags/cryptography/</link></image><item><title>It’s PQC Time! 后量子密码学组件迁移现状</title><link>https://luminolt.cn/post/2507-its-pqc-time/</link><pubDate>Mon, 07 Jul 2025 18:52:53 +0800</pubDate><guid>https://luminolt.cn/post/2507-its-pqc-time/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>想象一下，你的日记本上锁了，但你知道，十年后某个人会拥有一把万能钥匙，能轻松地打开你的所有秘密。你现在应该做什么？这就是我们今天面临的量子威胁场景：我们所有数字世界中的信息可能正面临这样的未来风险。&lt;/p>
+&lt;p>在本文中，我们会对后量子密码学这一概念进行简单的说明，但不会讲解其中的数学原理。希望你能够知道目前密码学领域正在默默进行的一场变革。&lt;/p>
+&lt;blockquote>
+&lt;p>本文面向对密码学有基础了解，但不需要深入掌握（例如无需了解可证明安全）的读者。&lt;/p>
+&lt;p>强烈建议在继续阅读之前，先浏览 The Missing Semester of Your CS Education 中 &lt;a href="https://missing.csail.mit.edu/2020/security/" target="_blank" rel="noopener">Security 部分的内容&lt;/a>。在对一下概念有一定了解后再继续阅读：&lt;/p>
+&lt;ul>
+&lt;li>安全 Hash 函数&lt;/li>
+&lt;li>对称加密和非对称加密&lt;/li>
+&lt;li>数字签名算法&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;h2 id="非对称算法的量子威胁">非对称算法的量子威胁&lt;/h2>
+&lt;p>目前，最常用的非对称算法主要分成两大类。一类是基于大数分解困难问题的 RSA 类算法，而另一类是基于离散对数求解困难问题的 DLP 类算法。&lt;/p>
+&lt;p>这两类算法都广泛应用于加密和签名。例如，当你使用 GitHub 并通过 SSH 连接远程仓库时，需要在设置中的 SSH and GPG keys 中绑定自己的 SSH 密钥。&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="flex justify-center ">
+&lt;div class="w-100" >&lt;img src="https://notes.sjtu.edu.cn/uploads/upload_d1ff58341470c7bcc0108c36210dd26a.png" alt="GitHub 中 SSH and GPG keys 配置栏" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>一般来说，参照网上的教程你会经历以下流程：&lt;/p>
+&lt;ol>
+&lt;li>安装下载 OpenSSH&lt;/li>
+&lt;li>命令行输入 &lt;code>ssh-keygen&lt;/code> 一路回车&lt;/li>
+&lt;li>在现实的路径（如 &lt;code>~/.ssh&lt;/code> ）中能查看到对应的 &lt;code>.pub&lt;/code> 文件&lt;/li>
+&lt;li>把 &lt;code>.pub&lt;/code> 复制到 GitHub 上对应的 SSH keys 设置中。&lt;/li>
+&lt;/ol>
+&lt;p>如果你在多个平台使用过 OpenSSH，可能会发现有时候 pub 文件中的内容很长，有时候很短。细心的读者可能注意到，OpenSSH 在生成密钥时提示的算法可能不同：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># A&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;gt; ssh-keygen
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Generating public/private ed25519 key pair.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># B&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;gt; ssh-keygen
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Generating public/private rsa key pair.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这两者都是数字签名算法，其中 Ed25519 签名属于基于椭圆曲线离散对数问题（EC-DLP）的算法，RSA 签名则是基于整数分解问题的 RSA 类算法。Ed25519 因效率高、密钥长度短，正逐渐取代 RSA，但这种迁移&lt;strong>并非强制&lt;/strong>。&lt;/p>
+&lt;p>域名的数字证书的情况类似。比如以下官网截图显示，Google 使用 RSA 签名证书，而 ChatGPT 使用 ECDSA 签名证书（对应 EC-DLP 类）。&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="flex justify-center ">
+&lt;div class="w-100" >&lt;img src="https://notes.sjtu.edu.cn/uploads/upload_56eb8bc0e27fd41487c74e36b75b9460.png" alt="Google 采用了 RSA 签名证书" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="flex justify-center ">
+&lt;div class="w-100" >&lt;img src="https://notes.sjtu.edu.cn/uploads/upload_91b44f9405946f4e19abcbd1f95c4b3b.png" alt="ChatGPT 采用了 ECDSA 签名证书 (对应 ECDLP 类)" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>目前 RSA 和 ECDSA 的安全性均依赖于经典计算机无法有效解决的大数分解和离散对数问题。然而，这种安全假设在量子计算机出现后将受到严重威胁。&lt;/p>
+&lt;p>1994年，Shor 提出了一个基于量子计算机的高效算法，能够以多项式时间完成整数分解和离散对数问题的求解。这意味着 RSA 和 ECDSA 等传统算法在量子时代将不再安全。&lt;/p>
+&lt;h2 id="后量子密码算法的诞生">后量子密码算法的诞生&lt;/h2>
+&lt;p>为抵御量子计算机的威胁，后量子密码学（Post-Quantum Cryptography, PQC）应运而生。这些算法专门设计用于抵抗量子计算机攻击，即使量子计算机得到普及，也能保持安全性。&lt;/p>
+&lt;p>值得一提的是，PQC 算法要求能在传统计算机上执行，换言之，我们的设备都能够运行 PQC 算法。这是和另外一个领域“量子密码学”的不同之处。&lt;/p>
+&lt;p>目前，PQC 算法按照底层的数学结构主要分为以下几个大类：&lt;/p>
+&lt;ul>
+&lt;li>基于格理论（Lattice-based）&lt;/li>
+&lt;li>基于多变量多项式方程组（Multivariate）&lt;/li>
+&lt;li>基于哈希函数（Hash-based）&lt;/li>
+&lt;li>基于纠错码（Code-based）&lt;/li>
+&lt;li>基于同源性问题（Isogeny-based）&lt;/li>
+&lt;/ul>
+&lt;p>目前 NIST 已经完成标准化的 PQC 算法包括：&lt;/p>
+&lt;ul>
+&lt;li>FIPS 203 &lt;strong>ML-KEM&lt;/strong>: Module-Lattice-Based Key-Encapsulation Mechanism Standard
+&lt;ul>
+&lt;li>源自于 CRYSTALS-Kyber&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>FIPS 204 &lt;strong>ML-DSA&lt;/strong>: Module-Lattice-Based Digital Signature Standard
+&lt;ul>
+&lt;li>源自于 CRYSTALS-Dilithium&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>FIPS 205 &lt;strong>SLH-DSA&lt;/strong>: Stateless Hash-Based Digital Signature Standard
+&lt;ul>
+&lt;li>源自于 SPHINCS+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>已经通过筛选，正在标准化流程中的：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>FALCON&lt;/strong>: Fast-Fourier Lattice-based Compact Signatures over NTRU&lt;/li>
+&lt;li>&lt;strong>HQC&lt;/strong>: Hamming Quasi-Cyclic Code-based Public Key Encryption Scheme&lt;/li>
+&lt;/ul>
+&lt;h2 id="开源-pqc-仓库">开源 PQC 仓库&lt;/h2>
+&lt;p>开源社区在PQC的研发和推广中发挥着至关重要的作用。一系列开源PQC库为开发者提供了必要的工具，使他们能够试验、集成和部署PQC算法。这些项目不仅实现了已标准化的算法，还积极参与到对候选算法的研究和评估中，从而加速了整个PQC生态系统的创新和成熟。&lt;/p>
+&lt;p>其中 Open Quantum Safe (OQS) 项目 liboqs 是PQC开源领域的核心力量之一，现已成为Linux基金会后量子密码学联盟 (PQCA) 的一部分。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a href="https://github.com/open-quantum-safe/liboqs" target="_blank" rel="noopener">open-quantum-safe/liboqs&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>liboqs 集成了多种量子抵抗的密钥封装机制 (KEM) 和数字签名算法 。它不仅支持NIST已选定的算法，如 ML-KEM (Kyber)、ML-DSA (Dilithium)、SLH-DSA (SPHINCS+) 和 Falcon，还包含了 NIST 第四轮评估中的候选算法，以及其他一些有前景的算法。&lt;/p>
+&lt;p>liboqs 提供了统一的 API 接口，方便开发者在不同算法间切换。此外，该项目还包含了测试工具集和性能基准测试程序，并提供了针对多种编程语言（如 Java、Python、Rust、Go）的封装库以及与 OpenSSL 等常用应用的集成方案。&lt;/p>
+&lt;h2 id="性能挑战">性能挑战&lt;/h2>
+&lt;p>PQC算法在设计上与传统密码算法有显著差异，这带来了一系列性能挑战。&lt;/p>
+&lt;p>如果用一句话总结，可以说：“PQC 算法没有一个能打的。”&lt;/p>
+&lt;p>参考 Westerbaan 和 Valenta 博文中的总结，我们可以看出，PQC 签名算法（✅ 标准化完成，📝 即将标准化，🤔 候选中）与传统算法（❌）做性能对比，PQC 签名算法在密钥长度和签名/验证时间上的整体表现较差。&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="flex justify-center ">
+&lt;div class="w-100" >&lt;img src="https://notes.sjtu.edu.cn/uploads/upload_8769fc8dbe7af7804712bef2ce20ede4.png" alt="PQC 算法和经典算法的性能对比" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>PQC 算法的性能是如此糟糕，以至于在实际部署的时候会受到来自厂商的阻力，但安全需求迫使我们继续探索。&lt;/p>
+&lt;h2 id="nist-的-10-年大计">NIST 的 10 年大计&lt;/h2>
+&lt;p>尽管如此，我们依然对 PQC 的发展抱有乐观态度。&lt;/p>
+&lt;p>根据 NIST 内部报告 NIST IR 8547，建议从现在到 2030 年逐步淘汰易受攻击的加密方法，到 2030 年弃用依赖 112 位安全性的算法，并目标在 2035 年前完成所有系统的迁移。&lt;/p>
+&lt;p>为什么后量子密码学的转移部署如此迫切？是因为 Store‑Now‑Harvest‑Later （存储后收割）这一攻击现象的存在。在这个情况下，攻击者现在截获并长期保存看似安全的加密数据，等待未来量子计算足够成熟时再行解密。&lt;/p>
+&lt;p>这种威胁特别针对需要长期保密的数据，如政府机密、商业秘密、医疗记录。在量子计算成为现实的那一天，这些陈年数据将被一次性破解，造成难以逆转的损失。&lt;/p>
+&lt;p>更令安全策略复杂化的是，这种攻击本身在当前不会立即显现危害，所以往往被低估。但全球多国政府和企业已经开始警觉，主动推动 PQC 算法的迁移部署，以应对这一“时延性”攻击&lt;/p>
+&lt;h2 id="业界迁移情况">业界迁移情况&lt;/h2>
+&lt;p>近年来，PQC 算法逐步开始工程化并被应用于实际系统中。例如：&lt;/p>
+&lt;p>OpenSSL 从 3.0 版本起已经开始引入后量子密码算法，提供了如 Kyber 和 Dilithium 的支持。&lt;/p>
+&lt;p>OpenSSH 在 9.9 版本中也开始支持已经被 NIST 标准化的后量子密钥交换算法，通过混合（hybrid）密钥交换方法&lt;code>mlkem768x25519-sha256&lt;/code>，同时采用传统算法 X25519 和 PQC 算法 ML-KEM 进行密钥交换，以增强安全性。而在 10.0 版本中，该方法已经被作为&lt;strong>默认&lt;/strong>的密钥交换方法。&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="flex justify-center ">
+&lt;div class="w-100" >&lt;img src="https://notes.sjtu.edu.cn/uploads/upload_499f839a77d6fe1275bb1857a0ffb946.png" alt="查看 OpenSSH 支持的 PQC 算法 (红框选部分)" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>我们可以搭建一个环境来简单的测试一下。由于目前主流的发行版还没有将 OpenSSH 10.x 版本作为默认版本，因此我们需要自己 build OpenSSH。&lt;/p>
+&lt;p>我们编写一个简单的 Dockerfile 来构建容器：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> ubuntu:24.04&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENV&lt;/span> &lt;span class="nv">DEBIAN_FRONTEND&lt;/span>&lt;span class="o">=&lt;/span>noninteractive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 安装依赖&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> apt-get update &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt-get install -y wget build-essential zlib1g-dev libssl-dev libpam0g-dev libselinux1-dev libedit-dev &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm -rf /var/lib/apt/lists/*&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> useradd -r -M -s /usr/sbin/nologin sshd&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 下载并编译 OpenSSH 10&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> wget https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.0p2.tar.gz &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> tar xzf openssh-10.0p2.tar.gz &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> openssh-10.0*p* &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> ./configure --prefix&lt;span class="o">=&lt;/span>/usr --sysconfdir&lt;span class="o">=&lt;/span>/etc/ssh --with-pam --with-ssl-engine &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> make &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> make install &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> /tmp &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm -rf openssh-10.0*p* openssh-10.0p2.tar.gz&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 添加默认用户并设定密码&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> useradd -m user &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;user:password&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> chpasswd&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 初始化 sshd 所需环境&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> mkdir -p /var/run/sshd &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> ssh-keygen -A&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">EXPOSE&lt;/span>&lt;span class="s"> 22&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;/usr/sbin/sshd&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;-D&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后进行 Docker 容器的构建和运行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker build -t ssh10-test .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d --name ssh10-test -p 2222:22 ssh10-test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ssh -vvv -p &lt;span class="m">2222&lt;/span> user@localhost
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以在输出中找到：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">debug3: kex_choose_conf: will use strict KEX ordering
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">debug1: kex: algorithm: mlkem768x25519-sha256
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>表明在协商后默认的密钥交换算法为 &lt;code>mlkem768x25519-sha256&lt;/code>。&lt;/p>
+&lt;h2 id="小结">小结&lt;/h2>
+&lt;p>技术不断发展，安全需求也在随之变化。后量子密码学可能看起来有些复杂，但归根结底，它只是在默默地为我们的数字生活提供保障。希望通过本文，你对量子时代即将带来的变化有了初步了解。&lt;/p>
+&lt;h2 id="推荐阅读">推荐阅读&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener">The Missing Semester of Your CS Education&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.cloudflare.com/another-look-at-pq-signatures/" target="_blank" rel="noopener">A look at the latest post-quantum signature standardization candidate&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>RISecure-PUF: Multipurpose PUF-Driven Security Extensions with Lookaside Buffer in RISC-V</title><link>https://luminolt.cn/publication/2410-risecure-puf/</link><pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2410-risecure-puf/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
 &lt;span class="pr-3 pt-1 text-primary-600 dark:text-primary-300">
 &lt;svg height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">&lt;path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z"/>&lt;/svg>
 &lt;/span>
