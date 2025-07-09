@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | Chenghao Chen's Blog</title><link>https://luminolt.cn/post/</link><atom:link href="https://luminolt.cn/post/index.xml" rel="self" type="application/rss+xml"/><description>Blog</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jun 2022 18:52:53 +0800</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu1463231102154380852.png</url><title>Blog</title><link>https://luminolt.cn/post/</link></image><item><title>An Brief Introduction to Cryptography</title><link>https://luminolt.cn/post/2206-intro-to-cryptography/</link><pubDate>Tue, 21 Jun 2022 18:52:53 +0800</pubDate><guid>https://luminolt.cn/post/2206-intro-to-cryptography/</guid><description>&lt;h2 id="什么是密码学">什么是密码学？&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | Chenghao Chen's Blog</title><link>https://luminolt.cn/post/</link><atom:link href="https://luminolt.cn/post/index.xml" rel="self" type="application/rss+xml"/><description>Blog</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jun 2022 18:52:53 +0800</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu_ed8c8d7c730e2838.png</url><title>Blog</title><link>https://luminolt.cn/post/</link></image><item><title>An Brief Introduction to Cryptography</title><link>https://luminolt.cn/post/2206-intro-to-cryptography/</link><pubDate>Tue, 21 Jun 2022 18:52:53 +0800</pubDate><guid>https://luminolt.cn/post/2206-intro-to-cryptography/</guid><description>&lt;h2 id="什么是密码学">什么是密码学？&lt;/h2>
 &lt;p>密码学是数学和计算机科学的交叉学科。在国内一般作为
 信息安全专业的必修课程。密码学的开端是Shannon在1945年发表的《Communication Theory of Secrecy Systems》而在这之前，密码更像是一种技艺（Art）而非一种科学技术（Technique）。&lt;/p>
 &lt;blockquote>
-&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>
-&lt;/blockquote>
+&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>&lt;/blockquote>
 &lt;p>按照Shannon理论，密码学可分为两个阶段：&lt;/p>
 &lt;ul>
 &lt;li>古典密码学：基于巧妙构造形成的Art&lt;/li>
@@ -33,19 +32,16 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;Hoy!e-plCtlro&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而事实上，这就是一个栅栏密码，你可以在&lt;a href="https://www.qqxiuzi.cn/bianma/zhalanmima.php" target="_blank" rel="noopener">这个网站&lt;/a>上尝试。&lt;/p>
 &lt;blockquote>
-&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>
-&lt;/blockquote>
+&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>&lt;/blockquote>
 &lt;p>而这就是古典密码学从最原始的的阶段，步入了近现代的阶段。从一些工具的使用，变成了算数。在此基础上形成了大量的替换密码（如Caesar密码、Vigenère密码）。&lt;/p>
 &lt;blockquote>
-&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>
-&lt;/blockquote>
+&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>&lt;/blockquote>
 &lt;h2 id="现代密码学">现代密码学&lt;/h2>
 &lt;p>现代密码学的开端是Shannon的那篇文章，其中提出了一个重要的概念，完美安全性（Perfect Security）。完美安全性的形式化定义用到了概率论的知识，因此此处不展开。我们仅对其产生的原因进行一些阐述。&lt;/p>
 &lt;p>古典密码在当时基本全都被破解了，密码欠缺一个正式的、准确的定义去衡量证明一个密码方案是否具有严格的安全性，因此Shannon理论应运而生。&lt;/p>
 &lt;p>一个密码体系保证完美安全性，当其加密后的密文不会透露任何关于明文的信息。而在这种定义下，即使攻击者拥有无穷的算力，也不能被破解。&lt;/p>
 &lt;blockquote>
-&lt;p>😮注意，是无穷的算力！&lt;/p>
-&lt;/blockquote>
+&lt;p>😮注意，是无穷的算力！&lt;/p>&lt;/blockquote>
 &lt;p>但是根据Shannon的推论，一个保证完美安全性的密码体系，其密钥空间一定大于明文空间。也就是说，我的密钥不会比明文更短。而我们可以思考，如果有一个信道，可以安全的用于传输密钥，为什么不直接拿来传输明文呢？因此目前的密码体系都&lt;strong>不保证&lt;/strong>完美安全性。&lt;/p>
 &lt;p>而在这基础上，就催生了流密码和分块密码，他们被统称为对称密码学。总的来说，对称密码学致力于让短密钥经过一些神奇的操作，也可以发挥和长密钥相同的作用：&lt;/p>
 &lt;ul>
@@ -53,8 +49,7 @@
 &lt;li>分块密码：通过对明文分块，逐一用短密钥加密&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>
-&lt;/blockquote>
+&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>&lt;/blockquote>
 &lt;p>而与之对应的，是非对称密码学（又称为公钥密码学），该类密码体系的特点是拥有公钥和私钥两个密钥，他们往往基于数学上的难题进行规约：&lt;/p>
 &lt;ul>
 &lt;li>RSA：大数质因数分解难题&lt;/li>
@@ -63,12 +58,10 @@
 &lt;/ul>
 &lt;p>一个简单的例子是，给定两个大质数 $p, q$ ，给你他们的乘积 $N = pq$ ，你是很难分别求解出 $p$ 和 $q$ 的。&lt;/p>
 &lt;blockquote>
-&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>
-&lt;/blockquote>
+&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>&lt;/blockquote>
 &lt;p>而这种数学上的难解特性就可以被利用，构造密码体系。&lt;/p>
 &lt;blockquote>
-&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>
-&lt;/blockquote>
+&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>&lt;/blockquote>
 &lt;h2 id="小结">小结&lt;/h2>
 &lt;p>事实上，上面两个问题都只解决了数据隐秘性的保护，不一定能够保证数据仍是完整的、未被篡改过的。而这就需要更多的知识，包括：&lt;/p>
 &lt;ul>

@@ -1,8 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chenghao Chen's Blog</title><link>https://luminolt.cn/</link><atom:link href="https://luminolt.cn/index.xml" rel="self" type="application/rss+xml"/><description>Chenghao Chen's Blog</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu1463231102154380852.png</url><title>Chenghao Chen's Blog</title><link>https://luminolt.cn/</link></image><item><title>RISecure-PUF: Multipurpose PUF-Driven Security Extensions with Lookaside Buffer in RISC-V</title><link>https://luminolt.cn/publication/2410-risecure-puf/</link><pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2410-risecure-puf/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chenghao Chen's Blog</title><link>https://luminolt.cn/</link><atom:link href="https://luminolt.cn/index.xml" rel="self" type="application/rss+xml"/><description>Chenghao Chen's Blog</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate><image><url>https://luminolt.cn/media/icon_hu_ed8c8d7c730e2838.png</url><title>Chenghao Chen's Blog</title><link>https://luminolt.cn/</link></image><item><title>Key Guidance Invocation: A White-box Mode Enables Strong Space Hardness under Adaptively Chosen-Space Attacks</title><link>https://luminolt.cn/publication/2506-rubikstone/</link><pubDate>Sun, 02 Mar 2025 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2506-rubikstone/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
 &lt;span class="pr-3 pt-1 text-primary-600 dark:text-primary-300">
 &lt;svg height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">&lt;path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z"/>&lt;/svg>
 &lt;/span>
-&lt;span class="dark:text-neutral-300">This paper is still under submission.&lt;/span>
+&lt;span class="dark:text-neutral-300">This paper is still under peer review.&lt;/span>
+&lt;/div>
+&lt;!--
+Add the publication's **full text** or **supplementary notes** here. You can use rich formatting such as including [code, math, and images](https://docs.hugoblox.com/content/writing-markdown-latex/). --></description></item><item><title>RISecure-PUF: Multipurpose PUF-Driven Security Extensions with Lookaside Buffer in RISC-V</title><link>https://luminolt.cn/publication/2410-risecure-puf/</link><pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2410-risecure-puf/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
+&lt;span class="pr-3 pt-1 text-primary-600 dark:text-primary-300">
+&lt;svg height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">&lt;path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z"/>&lt;/svg>
+&lt;/span>
+&lt;span class="dark:text-neutral-300">This paper is still under peer review.&lt;/span>
 &lt;/div>
 &lt;!--
 Add the publication's **full text** or **supplementary notes** here. You can use rich formatting such as including [code, math, and images](https://docs.hugoblox.com/content/writing-markdown-latex/). --></description></item><item><title>2024 Cryptography Summer Camp</title><link>https://luminolt.cn/event/2406-crypto-summer-camp/</link><pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/event/2406-crypto-summer-camp/</guid><description>&lt;p>本项目为面向上海大学网络空间安全专业 2022 级本科生的暑期实训课程.&lt;/p>
@@ -34,8 +41,7 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;li>flag 形式均为：&lt;code>'flag{[0-9A-Za-z=_]*}'&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>新佛曰：諸隸僧降冥吽諸陀摩隸僧缽冥薩願耨咤陀願羅咤喃迦祗蜜耨阿嚤僧喼所聞薩闍嚩聞念須亦心耨冥心阿冥聞慧蜜咤冥心念訶冥嚩冥聞冥念降咤冥劫耨降寂願慧般祗闍隸冥修阿闍莊陀冥莊冥劫莊嚴冥宣隸阿摩嚩蜜心咒冥闍我須咒慧冥闍諦羅迦聞慧婆劫嘚慧咒迦慧慧我慧冥闍念劫嘇隸蜜祗伏嚤慧咒修缽聞色祗冥闍僧嘚迦降阿莊冥慧聞蜜降咤寂波嘇塞薩如囑&lt;/p>
-&lt;/blockquote>
+&lt;p>新佛曰：諸隸僧降冥吽諸陀摩隸僧缽冥薩願耨咤陀願羅咤喃迦祗蜜耨阿嚤僧喼所聞薩闍嚩聞念須亦心耨冥心阿冥聞慧蜜咤冥心念訶冥嚩冥聞冥念降咤冥劫耨降寂願慧般祗闍隸冥修阿闍莊陀冥莊冥劫莊嚴冥宣隸阿摩嚩蜜心咒冥闍我須咒慧冥闍諦羅迦聞慧婆劫嘚慧咒迦慧慧我慧冥闍念劫嘇隸蜜祗伏嚤慧咒修缽聞色祗冥闍僧嘚迦降阿莊冥慧聞蜜降咤寂波嘇塞薩如囑&lt;/p>&lt;/blockquote>
 &lt;h3 id="chal2-ezrsa">Chal2. ezRSA&lt;/h3>
 &lt;ul>
 &lt;li>本题共 1 个 flag&lt;/li>
@@ -92,12 +98,13 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">])&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 5796768148637887491255587039409951397511832995737366433505141785703232675749200657380232851343254281355390391562734825283953711907092653161783752372166386&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 7948512242985881433771203281939490726039994357587772712416312873824297606161653053722572268861029945737411249803561023517431875922105282741637330609169129&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Projects</title><link>https://luminolt.cn/projects/</link><pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/projects/</guid><description/></item><item><title>Armored Core of PKI: Remove Signing Keys for CA via Efficient and Trusted Physical Certification</title><link>https://luminolt.cn/publication/2404-armoredcore/</link><pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2404-armoredcore/</guid><description>&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Projects</title><link>https://luminolt.cn/projects/</link><pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/projects/</guid><description/></item><item><title>Now Let's Make It Physical: Enabling Physically Trusted Certificate Issuance for Keyless Security in CAs</title><link>https://luminolt.cn/publication/2404-armoredcore/</link><pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate><guid>https://luminolt.cn/publication/2404-armoredcore/</guid><description>&lt;!--
+&lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
 &lt;span class="pr-3 pt-1 text-primary-600 dark:text-primary-300">
 &lt;svg height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">&lt;path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z"/>&lt;/svg>
 &lt;/span>
 &lt;span class="dark:text-neutral-300">This paper is still under submission.&lt;/span>
-&lt;/div>
+&lt;/div> -->
 &lt;!--
 &lt;div class="flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900">
 &lt;span class="pr-3 pt-1 text-primary-600 dark:text-primary-300">
@@ -122,8 +129,7 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;li>flag 形式均为：&lt;code>'flag{[0-9A-Za-z=_]*}'&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>新佛曰：諸隸僧降冥吽諸陀摩隸僧缽冥薩願耨咤陀願羅咤喃迦祗蜜耨阿嚤僧喼所聞薩闍嚩聞念須亦心耨冥心阿冥聞慧蜜咤冥心念訶冥嚩冥聞冥念降咤冥劫耨降寂願慧般祗闍隸冥修阿闍莊陀冥莊冥劫莊嚴冥宣隸阿摩嚩蜜心咒冥闍我須咒慧冥闍諦羅迦聞慧婆劫嘚慧咒迦慧慧我慧冥闍念劫嘇隸蜜祗伏嚤慧咒修缽聞色祗冥闍僧嘚迦降阿莊冥慧聞蜜降咤寂波嘇塞薩如囑&lt;/p>
-&lt;/blockquote>
+&lt;p>新佛曰：諸隸僧降冥吽諸陀摩隸僧缽冥薩願耨咤陀願羅咤喃迦祗蜜耨阿嚤僧喼所聞薩闍嚩聞念須亦心耨冥心阿冥聞慧蜜咤冥心念訶冥嚩冥聞冥念降咤冥劫耨降寂願慧般祗闍隸冥修阿闍莊陀冥莊冥劫莊嚴冥宣隸阿摩嚩蜜心咒冥闍我須咒慧冥闍諦羅迦聞慧婆劫嘚慧咒迦慧慧我慧冥闍念劫嘇隸蜜祗伏嚤慧咒修缽聞色祗冥闍僧嘚迦降阿莊冥慧聞蜜降咤寂波嘇塞薩如囑&lt;/p>&lt;/blockquote>
 &lt;h3 id="chal2-ezrsa">Chal2. ezRSA&lt;/h3>
 &lt;ul>
 &lt;li>本题共 1 个 flag&lt;/li>
@@ -184,8 +190,7 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;p>密码学是数学和计算机科学的交叉学科。在国内一般作为
 信息安全专业的必修课程。密码学的开端是Shannon在1945年发表的《Communication Theory of Secrecy Systems》而在这之前，密码更像是一种技艺（Art）而非一种科学技术（Technique）。&lt;/p>
 &lt;blockquote>
-&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>
-&lt;/blockquote>
+&lt;p>You can check the &lt;a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="noopener">Wiki Page&lt;/a> for more information.&lt;/p>&lt;/blockquote>
 &lt;p>按照Shannon理论，密码学可分为两个阶段：&lt;/p>
 &lt;ul>
 &lt;li>古典密码学：基于巧妙构造形成的Art&lt;/li>
@@ -215,19 +220,16 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;Hoy!e-plCtlro&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而事实上，这就是一个栅栏密码，你可以在&lt;a href="https://www.qqxiuzi.cn/bianma/zhalanmima.php" target="_blank" rel="noopener">这个网站&lt;/a>上尝试。&lt;/p>
 &lt;blockquote>
-&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>
-&lt;/blockquote>
+&lt;p>解密过程偷懒不写啦，聪明如你一定能自己figure out!&lt;/p>&lt;/blockquote>
 &lt;p>而这就是古典密码学从最原始的的阶段，步入了近现代的阶段。从一些工具的使用，变成了算数。在此基础上形成了大量的替换密码（如Caesar密码、Vigenère密码）。&lt;/p>
 &lt;blockquote>
-&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>
-&lt;/blockquote>
+&lt;p>事实上computer最早的含义是计算员，大多都是一些熟练算术技巧的人来破译密码的，而我们熟知的Alan Turing事实上在二战时也是负责这个工作。&lt;/p>&lt;/blockquote>
 &lt;h2 id="现代密码学">现代密码学&lt;/h2>
 &lt;p>现代密码学的开端是Shannon的那篇文章，其中提出了一个重要的概念，完美安全性（Perfect Security）。完美安全性的形式化定义用到了概率论的知识，因此此处不展开。我们仅对其产生的原因进行一些阐述。&lt;/p>
 &lt;p>古典密码在当时基本全都被破解了，密码欠缺一个正式的、准确的定义去衡量证明一个密码方案是否具有严格的安全性，因此Shannon理论应运而生。&lt;/p>
 &lt;p>一个密码体系保证完美安全性，当其加密后的密文不会透露任何关于明文的信息。而在这种定义下，即使攻击者拥有无穷的算力，也不能被破解。&lt;/p>
 &lt;blockquote>
-&lt;p>😮注意，是无穷的算力！&lt;/p>
-&lt;/blockquote>
+&lt;p>😮注意，是无穷的算力！&lt;/p>&lt;/blockquote>
 &lt;p>但是根据Shannon的推论，一个保证完美安全性的密码体系，其密钥空间一定大于明文空间。也就是说，我的密钥不会比明文更短。而我们可以思考，如果有一个信道，可以安全的用于传输密钥，为什么不直接拿来传输明文呢？因此目前的密码体系都&lt;strong>不保证&lt;/strong>完美安全性。&lt;/p>
 &lt;p>而在这基础上，就催生了流密码和分块密码，他们被统称为对称密码学。总的来说，对称密码学致力于让短密钥经过一些神奇的操作，也可以发挥和长密钥相同的作用：&lt;/p>
 &lt;ul>
@@ -235,8 +237,7 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;li>分块密码：通过对明文分块，逐一用短密钥加密&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>
-&lt;/blockquote>
+&lt;p>此处是非常不严谨的表达，仅作为理解&lt;/p>&lt;/blockquote>
 &lt;p>而与之对应的，是非对称密码学（又称为公钥密码学），该类密码体系的特点是拥有公钥和私钥两个密钥，他们往往基于数学上的难题进行规约：&lt;/p>
 &lt;ul>
 &lt;li>RSA：大数质因数分解难题&lt;/li>
@@ -245,12 +246,10 @@ Add the publication's **full text** or **supplementary notes** here. You can use
 &lt;/ul>
 &lt;p>一个简单的例子是，给定两个大质数 $p, q$ ，给你他们的乘积 $N = pq$ ，你是很难分别求解出 $p$ 和 $q$ 的。&lt;/p>
 &lt;blockquote>
-&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>
-&lt;/blockquote>
+&lt;p>😈试试吧！N = 115157048927615167000080222307830600550443405087336034834570254657109854848846966155326673813367130632850579378687042597345617010423842872052308839845927421052730005967200985762648016655477422221735535543563770813175765249421783025141172284969133662823566566070113584080582203941254237438639149018559749238997&lt;/p>&lt;/blockquote>
 &lt;p>而这种数学上的难解特性就可以被利用，构造密码体系。&lt;/p>
 &lt;blockquote>
-&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>
-&lt;/blockquote>
+&lt;p>具体需要一些数论和抽象代数的知识，这里就不展开啦~&lt;/p>&lt;/blockquote>
 &lt;h2 id="小结">小结&lt;/h2>
 &lt;p>事实上，上面两个问题都只解决了数据隐秘性的保护，不一定能够保证数据仍是完整的、未被篡改过的。而这就需要更多的知识，包括：&lt;/p>
 &lt;ul>
